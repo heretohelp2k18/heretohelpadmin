@@ -9,11 +9,13 @@ class Webservice extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
         $this->load->model('WebserviceModel','model');
+        
+        $_POST = $_GET; // Android setup
     }
     
     public function index()
     {
-        echo "iCrime Web Service";
+        echo "Entering Here To Help Web Service...";
     }
 
     public function Signin()
@@ -134,26 +136,18 @@ class Webservice extends CI_Controller {
         $json_data = array();
         if($this->isUsernameAvailable($_POST['username']))
         {
-            if($this->isNumberAvailable($_POST['mobile']))
+            $id = $this->model->Register($_POST);
+            $json_data['id'] = $id;
+            if($id > 0)
             {
-                $id = $this->model->Register($_POST);
-                $json_data['id'] = $id;
-                $json_data['type'] = 'c';
-                if($id > 0)
-                {
-                    $json_data['success'] = TRUE;
-                }
-                else
-                {
-                    $json_data['success'] = FALSE;
-                    $json_data['message'] = "Error in inserting to the database";
-                }
+                $json_data['success'] = TRUE;
+                $json_data['message'] = "Your account has been successfully created! You may now login.";
             }
             else
             {
                 $json_data['success'] = FALSE;
-                $json_data['message'] = "Mobile number is already in used.";
-            }
+                $json_data['message'] = "Error in inserting to the database";
+            } 
         }
         else
         {

@@ -123,16 +123,18 @@ Class WebserviceModel extends CI_Model {
             extract($data);
             $password = sha1($password);
             $sql = "INSERT INTO app_users
-                    SET lastname = ?,
-                    firstname = ?,
-                    address = ?,
-                    mobile = ?,
+                    SET firstname = ?,
+                    middlename = ?,
+                    lastname = ?,
+                    gender = ?,
+                    age = ?,
                     username = ?,
+                    email = ?,
                     password = ?,
-                    enabled = 1,
-                    is_citizen  = 1
+                    position = ?,
+                    enabled = 1
                     ";
-            $stmt = $this->pdo->query($sql,array($lastname,$firstname,$address,$mobile,$username,$password));
+            $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$username,$email,$password,$usertype));
             $id = $this->pdo->insert_id();
             return $id;
         } 
