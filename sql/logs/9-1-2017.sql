@@ -1,0 +1,1 @@
+ALTER TABLE `appointment` ADD `total` DECIMAL(11,2) NOT NULL AFTER `status`;

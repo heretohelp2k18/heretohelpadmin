@@ -1,0 +1,1 @@
+<option value="<?php echo $tag; ?>" <?php echo $selected; ?>><?php echo strip_tags($content); ?></option>

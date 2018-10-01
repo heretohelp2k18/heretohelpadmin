@@ -1,0 +1,515 @@
+h1
+{
+    margin-bottom: 15px;
+    font-family: 'Oswald', sans-serif;
+    color: #243852;
+}
+
+h3
+{
+    font-family: 'Oswald', sans-serif;
+    color: #243852;
+}
+
+body
+{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar
+{
+    background: #3498db;
+    border-radius: 0;
+}
+
+.navbar, .navbar a, navbar a:focus
+{
+    color: #fff;
+    transition: 0.5;
+}
+
+.navbar li:hover,.navbar li:focus, .navbar li.open, .navbar li.open, .navbar li a:hover, .navbar li a:focus, .navbar li.open a:focus, .nav .open>a
+{
+    background: #2980b9;
+}
+
+.left-nav
+{
+    padding: 50px 0;
+    min-height: 100vh;
+}
+
+.left-nav .list-group-item:first-child, .left-nav .list-group-item:last-child
+{
+    border-radius: 0
+}
+
+.left-nav .list-group-item
+{
+    border-left: none;
+    border-right: none;
+}
+
+.left-nav li a
+{
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.left-nav li a i
+{
+    width: 30px;
+}
+
+.left-nav li a:hover
+{
+    color: #3498db;
+}
+
+.left-nav .list-group-item:hover
+{
+    background: #21ccc7;
+    color: #fff;
+    cursor: pointer;
+}
+
+.main-container
+{
+    margin-top: 50px;
+}
+
+.menu-icon
+{
+    float: left;
+    padding: 2px;
+    text-align: center;
+    background: url(/images/police.svg) center center no-repeat;
+    outline: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    margin: 7px;
+}
+
+.navbar-brand
+{
+    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+    margin-left: -10px !important;
+}
+
+.dropdown-menu>li>a:hover
+{
+    color : #fff;
+}
+
+.modules
+{
+    height: 100vh;
+    width: 200px;
+    background: #2980b9;
+    position: fixed;
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+.modules li
+{
+    display: block;
+    float: none;
+}
+
+.action-link
+{
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.floating-button
+{
+    padding: 17px 24px;
+    font-size: 22px;
+    background: #3498db;
+    color: #fff;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.floating-button:hover
+{
+    background: #3b5167;
+}
+
+.floating-button i
+{
+    transition: 0.5s;
+}
+
+.floating-button.toggled i
+{
+    transform: rotate(45deg);
+}
+
+.floating-button.toggled
+{
+    background: #e74c3c;
+}
+
+.btn-submit, .form-btn
+{
+    border: 2px solid #3498db;
+    background: #3498db;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.btn-submit
+{
+    margin-top: 5px;
+}
+
+.btn-submit:hover, .btn-submit:focus, .form-btn:hover, .form-btn:focus
+{
+    color: #3498db;
+    background: #fff;
+}
+
+.form-group 
+{
+    margin-bottom: 5px;
+}
+
+
+.map
+{
+    margin-top: -1100px;
+}
+
+.map.show
+{
+    margin-top: 0;
+}
+
+.modal-dialog
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) !important;
+    margin: 0;
+}
+
+.modal-dialog .close
+{
+    font-family: sans-serif;
+    font-size: 26px;
+    opacity: 1;
+    color: #3498db;
+}
+
+.map-holder
+{
+    height: 500px;
+    padding-right: 0;
+}
+
+#map 
+{
+    position: relative;
+    height: 500px;
+}
+
+#mapView
+{
+    position: relative;
+    height: 500px;
+}
+
+.map-holder #search
+{
+    position: absolute;
+    width: 50%;
+    left: 25px;
+    border-radius: 0;
+    top: 6px;
+}
+
+#map:after 
+{
+    width: 22px;
+    height: 40px;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 50%; left: 50%;
+    margin: -40px 0 0 -11px;
+    background: url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi_hdpi.png');
+    background-size: 22px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
+    pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
+}
+
+.stationformholder
+{
+    padding-left: 0;
+}
+
+.container
+{
+    max-width: 100%;
+}
+
+.wanted-form-holder
+{
+    margin-bottom: 100px;
+}
+
+.wanted-form-holder
+{
+    display: none;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #243852;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.login-holder
+{
+    width: 350px;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid #e6e6e6;
+}
+
+.login-holder .wrapper
+{
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login-holder img
+{
+    width: 50px;
+    margin: 10px;
+    float: left;
+}
+
+.login-title
+{
+    background: #3498db;
+}
+
+.login-title h3
+{
+    color: #fff;
+    margin: 22px 5px;
+    display: inline-block;
+}
+
+.login-inner
+{
+    padding: 20px;
+}
+
+form-template
+{
+    display: none;
+}
+
+.no-gutter
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.data-container .caption, .data-container .caption
+{
+    display: block;
+    padding: 10px;
+    background: #3498db;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.data-container .clear, .data-container .clear
+{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+.caption-holder
+{
+    margin: 10px 0;
+}
+
+.form-btn
+{
+    margin-top: 5px;
+}
+
+.form-btn i
+{
+    margin-right: 5px;
+}
+
+textarea
+{
+    resize: none;
+}
+
+.blotter-form-map
+{
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.blotter-form-map.show
+{
+    height: auto;
+    visibility: visible;
+}
+
+.blotter-form-map .map-holder
+{
+    padding-right: 15px;
+}
+
+.blotterformholder
+{
+    margin-bottom: 30px;
+}
+
+.txt-centered
+{
+    text-align: center;
+}
+
+.inline-header
+{
+    display: inline;
+    margin-bottom: 15px;
+}
+
+.offense-form-section
+{
+    display: none;
+}
+
+ul .list-group-item.active a,
+ul .list-group-item.active a:hover,
+ul .list-group-item.active a:focus
+{
+    color: #ffffff;
+}
+
+ul .list-group-item a
+{
+    display: block;
+}
+
+.input-group-addon.lbl
+{
+    min-width: 100px;
+}
+
+span.delete:hover
+{
+    transition: all 0.3s;
+    background: #e74c3c;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+blockquote.no-margin-bottom
+{
+    margin-bottom: 0 !important;
+}
+
+.margin-top-10
+{
+    margin-top: 10px;
+}
+
+.select-addon
+{
+    padding: 0;
+}
+
+.select-addon select
+{
+    border: none;
+    height: inherit;
+}
