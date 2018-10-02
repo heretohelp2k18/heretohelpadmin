@@ -25,9 +25,24 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,is_citizen FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,position FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
             return $stmt->result();
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function UpdateAppToken($userId, $token)
+    {
+        try
+        {
+            $sql = "UPDATE app_users SET session_app_id = ? where id = ?";
+            $stmt = $this->pdo->query($sql,array($token, $userId));
+            return $stmt;
         } 
         catch (Exception $ex) 
         {
