@@ -30,8 +30,10 @@ class Webservice extends CI_Controller {
             if(count($stmt) > 0)
             {
                 $json_data['usertype'] = $stmt[0]->position;
-                $json_data['id'] = $stmt[0]->id;
-                $json_data['firstname'] = $stmt[0]->firstname;
+                $json_data['userid'] = $stmt[0]->id;
+                $json_data['username'] = $stmt[0]->username;
+                $json_data['useremail'] = $stmt[0]->email;
+                $json_data['userfirstname'] = $stmt[0]->firstname;
                 $json_data['token'] = $this->generateAppToken($stmt[0]->id);
                 $json_data['success'] = TRUE;
             }
@@ -39,6 +41,52 @@ class Webservice extends CI_Controller {
             {
                 $json_data['success'] = FALSE;
                 $json_data['message'] = 'Login failed';
+            }
+        }
+        else
+        {
+            $json_data['success'] = FALSE;
+            $json_data['message'] = 'Invalid Action';
+        }
+
+        echo json_encode($json_data);
+        exit;
+    }
+    
+    public function ChatBotData()
+    {
+        $json_data = array();
+        $json_data['errorcode'] = "";
+        $json_data['message'] = "";
+        $json_data['preferences'] = array();
+        $json_data['chatbot'] = array();
+        if(isset($_POST['username']) && isset($_POST['token']))
+        {
+            $username = $_POST['username'];
+            $token = $_POST['token'];
+            
+            $stmt = $this->model->AuthenticateUserToken($username,$token);
+            if(count($stmt) > 0)
+            {
+                $stmt = $this->model->GetPreferences();
+                foreach($stmt->result() as $row)
+                {
+                    array_push($json_data['preferences'], $row);
+                }
+                
+                $stmt = $this->model->GetChatBotSequence();
+                foreach($stmt->result() as $row)
+                {
+                    array_push($json_data['chatbot'], $row);
+                }
+                
+                $json_data['success'] = TRUE;
+            }
+            else
+            {
+                $json_data['success'] = FALSE;
+                $json_data['message'] = 'Session Expired!';
+                $json_data['errorcode'] = "143"; //Session Expired
             }
         }
         else

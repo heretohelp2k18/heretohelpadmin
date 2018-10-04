@@ -25,8 +25,23 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,position FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,username,email,position FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
+            return $stmt->result();
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function AuthenticateUserToken($username,$token) 
+    {
+        try
+        {
+            $sql = "SELECT id FROM app_users where username = ? and session_app_id = ?";
+            $stmt = $this->pdo->query($sql,array($username,$token));
             return $stmt->result();
         } 
         catch (Exception $ex) 
@@ -42,6 +57,36 @@ Class WebserviceModel extends CI_Model {
         {
             $sql = "UPDATE app_users SET session_app_id = ? where id = ?";
             $stmt = $this->pdo->query($sql,array($token, $userId));
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GetPreferences()
+    {
+        try
+        {
+            $sql = "SELECT * FROM preferences";
+            $stmt = $this->pdo->query($sql);
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GetChatBotSequence()
+    {
+        try
+        {
+            $sql = "SELECT * FROM chatbot";
+            $stmt = $this->pdo->query($sql);
             return $stmt;
         } 
         catch (Exception $ex) 
