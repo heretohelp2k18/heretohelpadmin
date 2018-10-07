@@ -34,6 +34,7 @@ class Webservice extends CI_Controller {
                 $json_data['username'] = $stmt[0]->username;
                 $json_data['useremail'] = $stmt[0]->email;
                 $json_data['userfirstname'] = $stmt[0]->firstname;
+                $json_data['usergender'] = $stmt[0]->gender;
                 $json_data['token'] = $this->generateAppToken($stmt[0]->id);
                 $json_data['success'] = TRUE;
             }
