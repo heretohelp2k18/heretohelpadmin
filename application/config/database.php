@@ -119,6 +119,30 @@ if(IS_DEV)
         'save_queries' => TRUE
     );
 }
+else if(IS_TEST)
+{
+    $db['pdo'] = array(
+        'dsn'   => 'mysql:host=localhost;dbname=id7407650_heretohelp2k18',
+        //'hostname' => 'localhost',
+        'username' => 'id7407650_heretohelp2k18',
+        'password' => '2k18heretohelp',
+        'database' => 'id7407650_heretohelp2k18',
+        'dbdriver' => 'pdo',
+        'dbprefix' => '',
+        'pconnect' => FALSE,
+        'db_debug' => (ENVIRONMENT !== 'production'),
+        'cache_on' => FALSE,
+        'cachedir' => '',
+        'char_set' => 'utf8',
+        'dbcollat' => 'utf8_general_ci',
+        'swap_pre' => '',
+        'encrypt' => FALSE,
+        'compress' => FALSE,
+        'stricton' => FALSE,
+        'failover' => array(),
+        'save_queries' => TRUE
+    );
+}
 else
 {
     $db['pdo'] = array(

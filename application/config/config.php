@@ -8,14 +8,20 @@ if(isset($_SERVER['SERVER_NAME']))
     if(in_array('dev', $domain))
     {
         define('IS_DEV', TRUE);
+        define('IS_TEST', FALSE);
+        define('IS_LIVE', FALSE);
     }
     elseif(in_array('000webhostapp', $domain))
     {
         define('IS_DEV', FALSE);
+        define('IS_TEST', TRUE);
+        define('IS_LIVE', FALSE);
     }
     else
     {
-        define('IS_DEV', TRUE);
+        define('IS_DEV', FALSE);
+        define('IS_TEST', FALSE);
+        define('IS_LIVE', TRUE);
     }
 
 }
@@ -51,6 +57,10 @@ define('BLOTTER_ENTRY_NUMBER_START', 1000);
 if(IS_DEV)
 {
     $config['base_url'] = 'http://heretohelp.dev.ph/';
+}
+else if(IS_TEST)
+{
+    $config['base_url'] = 'http://heretohelp2k18.000webhostapp.com/';
 }
 else
 {
