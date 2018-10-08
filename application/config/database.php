@@ -148,9 +148,9 @@ else
     $db['pdo'] = array(
         'dsn'   => 'mysql:host=localhost;dbname=heretohelp',
         //'hostname' => 'localhost',
-        'username' => 'id2320038_icrime2k17',
-        'password' => '2k17icrime',
-        'database' => 'id2320038_icrime',
+        'username' => '',
+        'password' => '',
+        'database' => '',
         'dbdriver' => 'pdo',
         'dbprefix' => '',
         'pconnect' => FALSE,
