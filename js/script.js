@@ -875,7 +875,11 @@ var LoadAppUserEditMode = function(id)
                 {
                     $("#edit_id").val(data.info.id);
                     $("#edit_firstname").val(data.info.firstname);
+                    $("#edit_middlename").val(data.info.middlename);
                     $("#edit_lastname").val(data.info.lastname);
+                    $("#edit_age").val(data.info.age);
+                    $("#edit_gender").val(data.info.gender);
+                    $("#edit_email").val(data.info.email);
                     $("#edit_username").val(data.info.username);
                     $("#edit_position").val(data.info.position);
                     if(data.info.is_admin == 1)

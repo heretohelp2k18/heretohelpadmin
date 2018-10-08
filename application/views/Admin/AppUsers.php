@@ -24,7 +24,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Add User</h4>
             </div>
-            <div class="modal-body">
+              <div class="modal-body" style="max-height: 70vh; overflow-y: scroll;">
                 <div class="row">
                     <form id="app_user_form" class="col-xs-12">
                         <div class="form-group">
@@ -32,17 +32,37 @@
                           <input type="text" class="form-control input-sm" id="firstname" name="firstname" required>
                         </div>
                         <div class="form-group">
+                          <label for="usr">Middle Name:</label>
+                          <input type="text" class="form-control input-sm" id="middlename" name="middlename">
+                        </div>
+                        <div class="form-group">
                           <label for="usr">Last Name:</label>
                           <input type="text" class="form-control input-sm" id="lastname" name="lastname" required>
                         </div>
                         <div class="form-group">
-                            <label for="usr">Position:</label>
+                          <label for="usr">Age</label>
+                          <input type="number" class="form-control input-sm" id="age" name="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="usr">Gender</label>
+                            <select class="form-control input-sm" id="gender" name="gender" required>
+                                <option value="">...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="usr">User Type:</label>
                             <select class="form-control input-sm" id="position" name="position" required>
                                 <option value="">...</option>
                                 <option value="User">Regular User</option>
                                 <option value="Psychologist">Psychologist</option>
                                 <option value="Web Administrator">Web Administrator</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Email:</label>
+                          <input type="email" class="form-control input-sm" id="email" name="email" required>
                         </div>
                         <div class="form-group">
                           <label for="pwd">Username:</label>
@@ -58,7 +78,7 @@
                         </div>
                         <div class="form-group">
                             <label for="pwd">Web Admin User:</label>
-                            <label class="switch">
+                            <label class="switch switch-add-app-user">
                                 <input type="checkbox" name="is_admin">
                                 <span class="slider round"></span>
                             </label>
@@ -80,7 +100,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Update App User</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 70vh; overflow-y: scroll;">
                 <div class="row">
                     <form id="update_app_user_form" class="col-xs-12">
                         <input type="hidden" id="edit_id" name="edit_id">
@@ -89,8 +109,24 @@
                           <input type="text" class="form-control input-sm" id="edit_firstname" name="firstname" required>
                         </div>
                         <div class="form-group">
+                          <label for="usr">Middle Name:</label>
+                          <input type="text" class="form-control input-sm" id="edit_middlename" name="middlename">
+                        </div>
+                        <div class="form-group">
                           <label for="usr">Last Name:</label>
                           <input type="text" class="form-control input-sm" id="edit_lastname" name="lastname" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="usr">Age</label>
+                          <input type="number" class="form-control input-sm" id="edit_age" name="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="usr">Gender</label>
+                            <select class="form-control input-sm" id="edit_gender" name="gender" required>
+                                <option value="">...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="usr">User Type:</label>
@@ -100,6 +136,10 @@
                                 <option value="Psychologist">Psychologist</option>
                                 <option value="Web Administrator">Web Administrator</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Email:</label>
+                          <input type="email" class="form-control input-sm" id="edit_email" name="email" required>
                         </div>
                         <div class="form-group">
                           <label for="username">Username:</label>
@@ -162,5 +202,15 @@
     confirm_password.onkeyup = validatePassword;
     edit_password.onchange = editValidatePassword;
     edit_confirm_password.onkeyup = editValidatePassword;
+    
+    $(document).ready(function(){
+       $("#position").change(function(){
+          var value = $(this).val();
+          if(value == "Web Administrator")
+          {
+              $(".switch-add-app-user").trigger("click");
+          }
+       });
+    });
 
 </script>
