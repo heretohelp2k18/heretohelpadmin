@@ -1,0 +1,1 @@
+ALTER TABLE `app_users` ADD `idimage` VARCHAR(125) NOT NULL AFTER `position`, ADD `is_approved` TINYINT(1) NOT NULL AFTER `idimage`;
