@@ -45,6 +45,9 @@
         <div class="left-nav col-xs-2 no-print">
             <ul class="nav modules">
                 <li class="dropdown">
+                  <a a href="/admin/dashboard"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a>
+                </li>
+                <li class="dropdown">
                   <a a href="/admin/appUsers"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
                 </li>
                 <li class="dropdown">

@@ -19,7 +19,7 @@ if(isset($_SERVER['SERVER_NAME']))
     }
     else
     {
-        define('IS_DEV', FALSE);
+        define('IS_DEV', TRUE);
         define('IS_TEST', FALSE);
         define('IS_LIVE', TRUE);
     }

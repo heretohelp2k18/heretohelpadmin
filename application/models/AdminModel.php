@@ -9,9 +9,24 @@ Class AdminModel extends CI_Model {
     public function GetAppUsers() {
         try
         {
+            $addtional_query = "";
+            if(isset($_GET['qtype']))
+            {
+                $qtype = $_GET['qtype'];
+                switch ($qtype)
+                {
+                    case "User":
+                    case "Psychologist":
+                        $addtional_query = "AND position = '$qtype'";
+                        break;
+                    case "Pending":
+                        $addtional_query = "AND position = 'Psychologist' AND is_approved = 0";
+                }
+            }
+            
             $sql = "SELECT * FROM app_users 
                     WHERE enabled = 1
-                    AND position != ''
+                    $addtional_query
                     ORDER BY lastname,firstname,username";
             $stmt = $this->pdo->query($sql);
             return $stmt;
@@ -345,6 +360,59 @@ Class AdminModel extends CI_Model {
                     ";
             $stmt = $this->pdo->query($sql,array($id));
 
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GetActiveUserCount()
+    {
+        try
+        {
+            $sql = "SELECT count(*) as count FROM app_users 
+                    WHERE enabled = 1
+                    AND position = 'User'";
+            $stmt = $this->pdo->query($sql);
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GetActivePsychologist()
+    {
+        try
+        {
+            $sql = "SELECT count(*) as count FROM app_users 
+                    WHERE enabled = 1
+                    AND is_approved = 1
+                    AND position = 'Psychologist'";
+            $stmt = $this->pdo->query($sql);
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GetPendingPsychologist()
+    {
+        try
+        {
+            $sql = "SELECT count(*) as count FROM app_users 
+                    WHERE enabled = 1
+                    AND is_approved = 0
+                    AND position = 'Psychologist'";
+            $stmt = $this->pdo->query($sql);
             return $stmt;
         } 
         catch (Exception $ex) 

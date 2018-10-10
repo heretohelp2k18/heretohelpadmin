@@ -29,14 +29,27 @@ class Webservice extends CI_Controller {
             $stmt = $this->model->AuthenticateUser($username,$password);
             if(count($stmt) > 0)
             {
-                $json_data['usertype'] = $stmt[0]->position;
-                $json_data['userid'] = $stmt[0]->id;
-                $json_data['username'] = $stmt[0]->username;
-                $json_data['useremail'] = $stmt[0]->email;
-                $json_data['userfirstname'] = $stmt[0]->firstname;
-                $json_data['usergender'] = $stmt[0]->gender;
-                $json_data['token'] = $this->generateAppToken($stmt[0]->id);
-                $json_data['success'] = TRUE;
+                if(($stmt[0]->position == "Psychologist") && ($stmt[0]->is_approved == 0))
+                {
+                    $json_data['success'] = FALSE;
+                    $json_data['message'] = 'Your application is still waiting for approval.';
+                }
+                else if(($stmt[0]->position == "Psychologist") && ($stmt[0]->is_approved == 2))
+                {
+                    $json_data['success'] = FALSE;
+                    $json_data['message'] = 'Sorry, your application has been denied.';
+                }
+                else
+                {
+                    $json_data['usertype'] = $stmt[0]->position;
+                    $json_data['userid'] = $stmt[0]->id;
+                    $json_data['username'] = $stmt[0]->username;
+                    $json_data['useremail'] = $stmt[0]->email;
+                    $json_data['userfirstname'] = $stmt[0]->firstname;
+                    $json_data['usergender'] = $stmt[0]->gender;
+                    $json_data['token'] = $this->generateAppToken($stmt[0]->id);
+                    $json_data['success'] = TRUE;
+                }
             }
             else
             {
@@ -124,7 +137,14 @@ class Webservice extends CI_Controller {
             if($id > 0)
             {
                 $json_data['success'] = TRUE;
-                $json_data['message'] = "Success! You may now login.";
+                if($_POST['usertype'] == "Psychologist")
+                {
+                    $json_data['message'] = "Application submitted! Please visit this app time to time to check the status of your application.";
+                }
+                else
+                {
+                    $json_data['message'] = "Success! You may now login.";
+                }
             }
             else
             {
@@ -210,5 +230,22 @@ class Webservice extends CI_Controller {
         $json_data['success'] = TRUE;
         echo json_encode($json_data);
         exit;
+    }
+    
+    public function UploadImage()
+    {
+        $json_data = array();
+        $json_data['success'] = FALSE;
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $uploads_dir = FCPATH.'images/uploads/';
+            $tmp_name = $_FILES['image']['tmp_name'];
+            $pic_name = $_FILES['image']['name'];
+            move_uploaded_file($tmp_name, $uploads_dir.$pic_name);
+            $json_data['success'] = TRUE;
+        }
+        else{
+            echo "File not uploaded successfully.";
+        }
+        echo json_encode($json_data);
     }
 }

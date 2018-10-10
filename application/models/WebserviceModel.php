@@ -25,7 +25,7 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,username,email,position,gender FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,username,email,position,gender,is_approved FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
             return $stmt->result();
         } 
@@ -102,19 +102,41 @@ Class WebserviceModel extends CI_Model {
         {
             extract($data);
             $password = sha1($password);
-            $sql = "INSERT INTO app_users
-                    SET firstname = ?,
-                    middlename = ?,
-                    lastname = ?,
-                    gender = ?,
-                    age = ?,
-                    username = ?,
-                    email = ?,
-                    password = ?,
-                    position = ?,
-                    enabled = 1
-                    ";
-            $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$username,$email,$password,$usertype));
+            
+            if($usertype == "Psychologist")
+            {
+                $sql = "INSERT INTO app_users
+                        SET firstname = ?,
+                        middlename = ?,
+                        lastname = ?,
+                        gender = ?,
+                        age = ?,
+                        username = ?,
+                        email = ?,
+                        password = ?,
+                        position = ?,
+                        enabled = 1,
+                        is_approved = 0,
+                        idimage = ?
+                        ";
+                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$username,$email,$password,$usertype,$idimage));
+            }
+            else
+            {
+                $sql = "INSERT INTO app_users
+                        SET firstname = ?,
+                        middlename = ?,
+                        lastname = ?,
+                        gender = ?,
+                        age = ?,
+                        username = ?,
+                        email = ?,
+                        password = ?,
+                        position = ?,
+                        enabled = 1
+                        ";
+                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$username,$email,$password,$usertype));
+            }
             $id = $this->pdo->insert_id();
             return $id;
         } 

@@ -87,7 +87,7 @@ class Admin extends CI_Controller {
 
     public function index()
     {
-        $this->AppUsers();
+        $this->Dashboard();
     }
 
     public function AppUsers()
@@ -97,7 +97,14 @@ class Admin extends CI_Controller {
         $stmt = $this->model->GetAppUsers();
         foreach($stmt->result() as $row)
         {
-            $data['list'] .= $this->load->view('Admin/AppUsersList',$row,TRUE);
+            if(isset($_GET['qtype']) && ($_GET['qtype'] == "Pending"))
+            {
+                $data['list'] .= $this->load->view('Admin/AppUsersListReview',$row,TRUE);
+            }
+            else
+            {
+                $data['list'] .= $this->load->view('Admin/AppUsersList',$row,TRUE);
+            }
         }
 
         $this->load->view('Admin/AdminHeader');
@@ -151,6 +158,35 @@ class Admin extends CI_Controller {
         $json_data['success'] = TRUE;
         echo json_encode($json_data);
         exit;
+    }
+    
+    public function Dashboard()
+    {
+        $data = array();
+        // User Count
+        $stmt = $this->model->GetActiveUserCount();
+        foreach($stmt->result() as $row)
+        {
+            $data['usercount'] = $row->count;
+        }
+        
+        // Psychologist Count
+        $stmt = $this->model->GetActivePsychologist();
+        foreach($stmt->result() as $row)
+        {
+            $data['psychcount'] = $row->count;
+        }
+        
+        // Pending Psychologist Count
+        $stmt = $this->model->GetPendingPsychologist();
+        foreach($stmt->result() as $row)
+        {
+            $data['pendpsychcount'] = $row->count;
+        }
+        
+        $this->load->view('Admin/AdminHeader');
+        $this->load->view('Admin/Dashboard/DashboardIndex',$data);
+        $this->load->view('Admin/AdminFooter');
     }
     
     public function ChatBot()
@@ -356,69 +392,6 @@ class Admin extends CI_Controller {
         }
         echo json_encode($json_data);
         exit;
-    }
-    
-    public function SaveImage($id)
-    {
-        $status = array();
-        $status['message'] = '';
-        
-        $target_dir = FCPATH.'images/uploads/';
-        $filename = $id.'_'.basename($_FILES["upload_image"]["name"]);
-        $target_file = $target_dir.$filename;
-        $uploadOk = 1;
-        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-        // Check if image file is a actual image or fake image
-        if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["upload_image"]["tmp_name"]);
-            if($check !== false) {
-                //echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                $status['message'] .= "File is not an image. ";
-                $uploadOk = 0;
-            }
-        }
-        
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            $status['message'] .= "Sorry, file already exists. ";
-            $uploadOk = 0;
-        }
-        // Check file size
-        if ($_FILES["upload_image"]["size"] > 500000) {
-            $status['message'] .= "Sorry, your file is too large (maximum of 5mb). ";
-            $uploadOk = 0;
-        }
-        // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
-            $status['message'] .= "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
-            $uploadOk = 0;
-        }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            $status['message'] .= "Sorry, your file was not uploaded. ";
-        // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["upload_image"]["tmp_name"], $target_file)) {
-                $status['message'] = "The file ". basename( $_FILES["upload_image"]["name"]). " has been uploaded.";
-            } else {
-                $status['message'] .= "Sorry, there was an error uploading your file. ";
-            }
-        }
-        
-        if($uploadOk)
-        {
-            $status['success'] = TRUE;
-        }
-        else
-        {
-            $status['success'] = FALSE;
-        }
-        
-        $status['filename'] = $filename;
-        return $status;
     }
     
     public function redirect($url)
