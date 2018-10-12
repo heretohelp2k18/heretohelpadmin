@@ -160,6 +160,27 @@ class Admin extends CI_Controller {
         exit;
     }
     
+    public function SetApproveUser()
+    {
+        $json_data = array();
+        $json_data['success'] = $this->model->SetApproveUser($_POST);
+        $json_data['message'] = "Error updating to the database.";
+        if($json_data['success'])
+        {
+            if($_POST['action'] == "1")
+            {
+                $json_data['message'] = "Application successfully approved.";
+            }
+            else
+            {
+                $json_data['message'] = "Application has been denied.";
+            }
+        }
+        
+        echo json_encode($json_data);
+        exit;
+    }
+
     public function Dashboard()
     {
         $data = array();

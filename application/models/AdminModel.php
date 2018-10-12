@@ -42,7 +42,7 @@ Class AdminModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,middlename,lastname,age,gender,position,email,username,is_admin FROM app_users WHERE id = ?";
+            $sql = "SELECT id,firstname,middlename,lastname,age,gender,position,email,username,is_admin,idimage FROM app_users WHERE id = ?";
             $stmt = $this->pdo->query($sql,array($id));
             $result = $stmt->result();
             return (array) $result[0];
@@ -153,6 +153,24 @@ Class AdminModel extends CI_Model {
             }
             return $stmt;
         } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function SetApproveUser($data) {
+        try
+        {
+            extract($data);
+            $sql = "UPDATE app_users
+                    SET is_approved = ?
+                    WHERE id = ?
+                    ";
+            $stmt = $this->pdo->query($sql,array($action,$id));
+            return $stmt;
+        }
         catch (Exception $ex) 
         {
             echo $ex;

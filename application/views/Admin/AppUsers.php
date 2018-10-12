@@ -169,6 +169,33 @@
           </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="review-modal" role="dialog">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Applicant</h4>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: scroll;">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <input type="hidden" id="review_id" name="review_id">
+                        <table class="table table-striped" id="review-user-info">
+                        </table>
+                        <div class="form-group">
+                            <img id="review_image" class="img-responsive">
+                        </div>
+                        <div class="form-group" style="margin-top: 10px;">
+                            <input type="button" class="review-action btn btn-danger pull-right" data-value="2" value="Deny">
+                            <input type="button" class="review-action btn btn-success pull-right" data-value="1" style="margin-right: 10px;" value="Approve">
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 
 <span class="floating-button add-app-user">
@@ -211,6 +238,106 @@
               $(".switch-add-app-user").trigger("click");
           }
        });
+       
+       $(".review_app_user").click(function(){
+            var id = $(this).attr("data-id");
+            $.ajax({
+                url : '/admin/GetAppUserById',
+                method : 'POST',
+                data : {
+                    id : id
+                },
+                dataType : "json",
+                beforeSend : function(){
+                    loading();
+                },
+                success : function(data){
+                    dismissLoading();
+                    if(data.success)
+                    {
+                        $("#review-user-info").html("");
+                        var refined_data = [
+                            {
+                                label : "First Name",
+                                value : data.info.firstname
+                            },
+                            {
+                                label : "Middle Name",
+                                value : data.info.middlename
+                            },
+                            {
+                                label : "Last Name",
+                                value : data.info.lastname
+                            },
+                            {
+                                label : "Age",
+                                value : data.info.age
+                            },
+                            {
+                                label : "Gender",
+                                value : data.info.gender
+                            },
+                            {
+                                label : "Email Address",
+                                value : data.info.email
+                            }
+                        ];
+                        
+                        var info_details = "";
+                        $.each(refined_data, function(key, row){
+                            info_details += '<tr><td style="width:25%;">'+ row.label +'</td><td>'+ row.value +'</td></tr>';
+                        });
+                        
+                        $("#review_id").val(data.info.id);
+                        $("#review_image").attr("src","/images/uploads/"+data.info.idimage);
+                        $("#review-user-info").html(info_details);
+                        $("#review-modal").modal();
+                    }
+                },
+                error : function(){
+                    dismissLoading();
+                }
+            });
+        });
+        
+        $(".review-action").click(function(){
+            var action = $(this).attr("data-value");
+            $.ajax({
+                url : '/admin/SetApproveUser',
+                method : 'POST',
+                data : {
+                    id : $("#review_id").val(),
+                    action : action
+                },
+                dataType : "json",
+                beforeSend : function(){
+                    loading();
+                },
+                success : function(data){
+                    dismissLoading();
+                    if(data.success)
+                    {
+                        swal({
+                            title: "Successful",
+                            text: data.message,
+                            type: "success"
+                          },
+                          function(){
+                             window.location.reload();
+                          });
+                    }
+                    else
+                    {
+                        swal("Oops..",data.message,"error");
+                    }
+                },
+                error : function(){
+                    dismissLoading();
+                    swal("Oops..","Error connecting to server.","error");
+                }
+                    
+            });
+        });
     });
 
 </script>
