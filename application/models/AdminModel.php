@@ -16,8 +16,10 @@ Class AdminModel extends CI_Model {
                 switch ($qtype)
                 {
                     case "User":
-                    case "Psychologist":
                         $addtional_query = "AND position = '$qtype'";
+                        break;
+                    case "Psychologist":
+                        $addtional_query = "AND position = '$qtype' AND is_approved = 1";
                         break;
                     case "Pending":
                         $addtional_query = "AND position = 'Psychologist' AND is_approved = 0";
