@@ -46,6 +46,9 @@ class Webservice extends CI_Controller {
                     $json_data['username'] = $stmt[0]->username;
                     $json_data['useremail'] = $stmt[0]->email;
                     $json_data['userfirstname'] = $stmt[0]->firstname;
+                    $json_data['usermiddlename'] = $stmt[0]->middlename;
+                    $json_data['userlastname'] = $stmt[0]->lastname;
+                    $json_data['userage'] = $stmt[0]->age;
                     $json_data['usergender'] = $stmt[0]->gender;
                     $json_data['token'] = $this->generateAppToken($stmt[0]->id);
                     $json_data['success'] = TRUE;
@@ -155,7 +158,7 @@ class Webservice extends CI_Controller {
         else
         {
             $json_data['success'] = FALSE;
-            $json_data['message'] = "Username is already in used.";
+            $json_data['message'] = "Email is already in used.";
         }
         echo json_encode($json_data);
         exit;
@@ -166,23 +169,16 @@ class Webservice extends CI_Controller {
         $json_data = array();
         if($this->isUsernameAvailable($_POST['username'],$_POST['id']))
         {
-            if($this->isNumberAvailable($_POST['mobile'],$_POST['id']))
+            $updated = $this->model->UpdateAccount($_POST);
+            if($updated)
             {
-                $updated = $this->model->UpdateAccount($_POST);
-                if($updated)
-                {
-                    $json_data['success'] = TRUE;
-                }
-                else
-                {
-                    $json_data['success'] = FALSE;
-                    $json_data['message'] = "Error in inserting to the database";
-                }
+                $json_data['success'] = TRUE;
+                $json_data['message'] = "Account successfully updated";
             }
             else
             {
                 $json_data['success'] = FALSE;
-                $json_data['message'] = "Mobile number is already in used.";
+                $json_data['message'] = "Error in inserting to the database";
             }
         }
         else

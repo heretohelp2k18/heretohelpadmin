@@ -25,7 +25,7 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,username,email,position,gender,is_approved FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,is_approved FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
             return $stmt->result();
         } 
@@ -156,28 +156,32 @@ Class WebserviceModel extends CI_Model {
             {
                 $password = sha1($password);
                 $sql = "UPDATE app_users
-                        SET lastname = ?,
-                        firstname = ?,
-                        address = ?,
-                        mobile = ?,
+                        SET firstname = ?,
+                        middlename = ?,
+                        lastname = ?,
+                        gender = ?,
+                        age = ?,
                         username = ?,
+                        email = ?,
                         password = ?
                         WHERE id = ?
                         ";
-                $stmt = $this->pdo->query($sql,array($lastname,$firstname,$address,$mobile,$username,$password,$id));
+                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$email,$email,$password,$id));
                 return $stmt;
             }
             else
             {
                 $sql = "UPDATE app_users
-                        SET lastname = ?,
-                        firstname = ?,
-                        address = ?,
-                        mobile = ?,
-                        username = ?
+                        SET firstname = ?,
+                        middlename = ?,
+                        lastname = ?,
+                        gender = ?,
+                        age = ?,
+                        username = ?,
+                        email = ?
                         WHERE id = ?
                         ";
-                $stmt = $this->pdo->query($sql,array($lastname,$firstname,$address,$mobile,$username,$id));
+                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$email,$email,$id));
                 return $stmt;
             }
         } 
