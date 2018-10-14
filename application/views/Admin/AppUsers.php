@@ -231,6 +231,11 @@
     edit_confirm_password.onkeyup = editValidatePassword;
     
     $(document).ready(function(){
+        if($("#appUsersBody").children("tr").length == 0)
+        {
+           $("#appUsersBody").html('<tr><td colspan="5" class="text-center"><i>No records found...</i></td></tr>') 
+        }
+        
        $("#position").change(function(){
           var value = $(this).val();
           if(value == "Web Administrator")
