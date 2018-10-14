@@ -244,4 +244,76 @@ class Webservice extends CI_Controller {
         }
         echo json_encode($json_data);
     }
+    
+    public function AddChatroom()
+    {
+        $json_data = array();
+        $json_data['errorcode'] = "";
+        $json_data['message'] = "";
+        if(isset($_POST['username']) && isset($_POST['token']))
+        {
+            $username = $_POST['username'];
+            $token = $_POST['token'];
+            
+            $stmt = $this->model->AuthenticateUserToken($username,$token);
+            if(count($stmt) > 0)
+            {
+                $this->model->AddChatroom($_POST);
+                $json_data['success'] = TRUE;
+            }
+            else
+            {
+                $json_data['success'] = FALSE;
+                $json_data['message'] = 'Session Expired!';
+                $json_data['errorcode'] = "143"; //Session Expired
+            }
+        }
+        else
+        {
+            $json_data['success'] = FALSE;
+            $json_data['message'] = 'Invalid Action';
+        }
+
+        echo json_encode($json_data);
+        exit;
+    }
+    
+    public function GetChatroom()
+    {
+        $json_data = array();
+        $json_data['errorcode'] = "";
+        $json_data['message'] = "";
+        $json_data['chatroom_data'] = array();
+        if(isset($_POST['username']) && isset($_POST['token']))
+        {
+            $username = $_POST['username'];
+            $token = $_POST['token'];
+            
+            $stmt = $this->model->AuthenticateUserToken($username,$token);
+            if(count($stmt) > 0)
+            {
+                $json_data['success'] = TRUE;
+                $stmt = $this->model->GetChatrooms($_POST['userid'], $_POST['usertype']);
+                foreach($stmt->result() as $row)
+                {
+                    $row->chatdate =  date("M d o", strtotime($row->chatdate)) . " " . date("h:i a", strtotime($row->chatdate));
+                    array_push($json_data['chatroom_data'], $row);
+                }
+            }
+            else
+            {
+                $json_data['success'] = FALSE;
+                $json_data['message'] = 'Session Expired!';
+                $json_data['errorcode'] = "143"; //Session Expired
+            }
+        }
+        else
+        {
+            $json_data['success'] = FALSE;
+            $json_data['message'] = 'Invalid Action';
+        }
+
+        echo json_encode($json_data);
+        exit;
+    }
 }

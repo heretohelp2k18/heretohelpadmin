@@ -251,6 +251,60 @@ Class WebserviceModel extends CI_Model {
             exit;
         }
     }
+    
+    public function AddChatroom($data)
+    {
+        try
+        {
+            extract($data);
+            $chatdate = date("Y-m-d H:i:s");
+            $sql = "INSERT INTO chatroom
+                    SET userid = ?,
+                    psychoid = ?,
+                    chatroom = ?,
+                    chatdate = ?
+                    ";
+            $stmt = $this->pdo->query($sql,array($userid, $psychoid, $chatroom, $chatdate));
+            $id = $this->pdo->insert_id();
+            return $id;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GetChatrooms($userid, $usertype)
+    {
+        try
+        {
+            if($usertype == "User")
+            {
+                $sql = "SELECT c.chatroom, c.chatdate, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
+                    INNER JOIN app_users AS u
+                    ON u.id = c.psychoid
+                    WHERE userid = ?
+                    ORDER BY c.id DESC";
+            }
+            else if($usertype == "Psychologist")
+            {
+                $sql = "SELECT c.chatroom, c.chatdate, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
+                    INNER JOIN app_users AS u
+                    ON u.id = c.userid
+                    WHERE psychoid = ?
+                    ORDER BY c.id DESC";
+            }
+            
+            $stmt = $this->pdo->query($sql, array($userid));
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
 }
 
 ?> 
