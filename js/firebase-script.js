@@ -25,14 +25,14 @@ var fireObj = {
         });
         con.onDisconnect().remove();
     },
-    ChatNotif : function(userId)
+    ChatNotif : function(userId, renderChatNotifListener)
     {
         var chatNotif = fdb.ref('chatnotif/' + userId);
         chatNotif.on('value', function(snapshot) {
             var notifVal = snapshot.val();
             if(notifVal != null)
             {
-                console.log(notifVal);
+                renderChatNotifListener(notifVal);
             }
         });
     }
