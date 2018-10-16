@@ -25,7 +25,7 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,is_approved FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,autoresponse,is_approved FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
             return $stmt->result();
         } 
@@ -162,11 +162,12 @@ Class WebserviceModel extends CI_Model {
                         gender = ?,
                         age = ?,
                         username = ?,
+                        autoresponse = ?,
                         email = ?,
                         password = ?
                         WHERE id = ?
                         ";
-                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$email,$email,$password,$id));
+                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$email,$autoresponse,$email,$password,$id));
                 return $stmt;
             }
             else
@@ -178,10 +179,11 @@ Class WebserviceModel extends CI_Model {
                         gender = ?,
                         age = ?,
                         username = ?,
-                        email = ?
+                        email = ?,
+                        autoresponse = ?
                         WHERE id = ?
                         ";
-                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$email,$email,$id));
+                $stmt = $this->pdo->query($sql,array($firstname,$middlename,$lastname,$gender,$age,$email,$email,$autoresponse,$id));
                 return $stmt;
             }
         } 
