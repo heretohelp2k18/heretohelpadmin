@@ -148,10 +148,15 @@ Class AdminModel extends CI_Model {
                         password = ?,
                         lastname = ?,
                         firstname = ?,
-                        position = ?
+                        middlename = ?,
+                        age = ?,
+                        gender = ?,
+                        email = ?,
+                        position = ?,
+                        is_admin = ?
                         WHERE id = ?
                         ";
-                $stmt = $this->pdo->query($sql,array($username,$password,$lastname,$firstname,$position,$edit_id));
+                $stmt = $this->pdo->query($sql,array($username,$password,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$edit_id));
             }
             return $stmt;
         } 
