@@ -513,3 +513,42 @@ blockquote.no-margin-bottom
     border: none;
     height: inherit;
 }
+
+.chat-box-container
+{
+    min-height: 70vh;
+    max-height: 70vh;
+    border: 1px solid #ddd;
+    border-left: none;
+}
+
+.chat-history-contaner
+{
+    min-height: 70vh;
+    max-height: 70vh;
+    border: 1px solid #ddd;
+}
+
+.chat-waiting
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.chat-loading
+{
+    display: block;
+    margin: 0 auto;
+    width: 50px;
+}
+
+.chat-input
+{
+    position: absolute;
+    bottom: 10px;
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+}
