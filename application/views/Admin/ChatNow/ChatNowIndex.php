@@ -29,10 +29,10 @@
                     </div>
                     <div class="form-group form-group-lg" style="margin-top: 10px;">
                         <div class="col-xs-12 col-sm-6 chatnotif-action-holder">
-                            <input type="button" class="chatnotif-action btn btn-lg btn-success form-control" data-value="1" value="Approve">
+                            <input type="button" class="chatnotif-action btn btn-lg btn-info form-control" data-value="1" data-dismiss="modal" value="Accept">
                         </div>
                         <div class="col-xs-12 col-sm-6 chatnotif-action-holder">
-                            <input type="button" class="chatnotif-action btn btn-lg btn-danger form-control" data-value="2" value="Deny">
+                            <input type="button" class="chatnotif-action btn btn-lg btn-danger form-control" data-value="2" data-dismiss="modal" value="Deny">
                         </div>
                     </div>
                 </div>
@@ -78,12 +78,30 @@ var renderChatNotif = function(chatNotif)
     {
         $("#chatnotif_image").attr("src","/images/girl.png");
     }
-    $("#chatnotif-modal").modal();
+    
+    $("#chatnotif-modal").modal({
+        backdrop: 'static',
+        keyboard: false
+    });
 };
 
 $(document).ready(function(){
     var userId = $("#userid").val();
+    // Setting online
     fireObj.Online(userId);
+    // Checking for notification
     fireObj.ChatNotif(userId, renderChatNotif);
+    
+    $(".chatnotif-action").click(function(){
+        var action = $(this).attr("data-value");
+        if(action == 1)
+        {
+            
+        }
+        else if(action == 2)
+        {
+            fireObj.DenyNotif(userId);
+        }
+    });
 });
 </script>

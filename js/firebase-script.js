@@ -35,6 +35,10 @@ var fireObj = {
                 renderChatNotifListener(notifVal);
             }
         });
+    },
+    DenyNotif : function(userId){
+        var chatNotif = fdb.ref('chatnotif/' + userId);
+        chatNotif.remove();
     }
 };
 
