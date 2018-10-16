@@ -89,7 +89,14 @@ class Admin extends CI_Controller {
 
     public function index()
     {
-        $this->Dashboard();
+        if($_SESSION['admin']['is_admin'] == 1)
+        {
+            $this->Dashboard();
+        }
+        else
+        {
+            $this->ChatNow();
+        }
     }
 
     public function AppUsers()
@@ -458,6 +465,15 @@ class Admin extends CI_Controller {
             $data['list'] .= $this->load->view('Pagination/ListItem',$page,TRUE);
         }
         return $this->load->view('Pagination/Index',$data,TRUE);
+    }
+    
+    // For Psychologist operations
+    public function ChatNow()
+    {
+        $data = array();
+        $this->load->view('Admin/AdminHeader');
+        $this->load->view('Admin/ChatNow/ChatNowIndex',$data);
+        $this->load->view('Admin/AdminFooter');
     }
 }
 
