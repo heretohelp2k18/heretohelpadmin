@@ -520,6 +520,7 @@ blockquote.no-margin-bottom
     max-height: 70vh;
     border: 1px solid #ddd;
     border-left: none;
+    padding-top: 15px;
 }
 
 .chat-history-contaner
@@ -551,4 +552,27 @@ blockquote.no-margin-bottom
     width: 95%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#vueapp .pull-right
+{
+    color: #fff;
+    background: #3498db;
+    padding: 12px;
+    border-radius: 25px 25px 0 25px;
+    margin-bottom: 5px;
+}
+
+#vueapp .pull-left
+{
+    background: #dddddd;
+    padding: 12px;
+    border-radius: 25px 25px 25px 0;
+    margin-bottom: 5px;
+}
+
+.send-chat:hover i
+{
+    color: #3498db;
+    cursor: pointer;
 }

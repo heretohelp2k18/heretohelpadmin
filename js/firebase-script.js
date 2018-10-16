@@ -59,7 +59,11 @@ var fireObj = {
             });
         });
     },
-    AcceptNotif : function(userId, chatroomId){
+    CurrentChatRoom : null,
+    AcceptNotif : function(userId, chatroomId, populateMessagesListener){
+        var chatNotif = fdb.ref('chatnotif/' + userId);
+        chatNotif.remove();
+        
         var chatRoom = fdb.ref('chatroom/');
         var chatRoomRow = chatRoom.child(chatroomId);
         chatRoomRow.on('value', function(snapshot) {
@@ -79,6 +83,8 @@ var fireObj = {
                         chatroom : chatroomId
                     };
                     fireObj.InsertChatRoom(dataObj);
+                    fireObj.CurrentChatRoom = chatroomId;
+                    populateMessagesListener(chatroomId);
                     fireObj.CurrentChatNotif = null;
                     $(".chat-waiting").hide();
                     $(".chat-input").removeClass("hidden");
@@ -112,6 +118,19 @@ var fireObj = {
                 swal("Error", "Error connecting to server.", "error");
             }
         });
+    },
+    InsertMessage : function(userId, comment)
+    {
+        var chatRoomId = fireObj.CurrentChatRoom;
+        var chatRoom = fdb.ref("/chatroom");
+        var chatRoomRow = chatRoom.child(chatRoomId).child("messages");
+        var newChat = chatRoomRow.push();
+        newChat.set({
+            comment : comment,
+            id : userId,
+            usertype : "Psychologist"
+        });
+        
     }
 };
 
