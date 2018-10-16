@@ -16,19 +16,26 @@ var fdb = firebase.database();
 
 var fireObj = {
     Online : function(userId)
-        {
-            conRef = fdb.ref('online/');
-//            var conRef = fdb.ref('online/' + userId).set({
-//                online: true,
-//                available: true
-//            });
-            var con = conRef.child(userId).set({
-                online: true,
-                available: true
-            });
-            
-            con.onDisconnect().remove();
-        }
+    {
+        conRef = fdb.ref('online/');
+        var con = conRef.child(userId);
+        con.set({
+            online: true,
+            available: true
+        });
+        con.onDisconnect().remove();
+    },
+    ChatNotif : function(userId)
+    {
+        var chatNotif = fdb.ref('chatnotif/' + userId);
+        chatNotif.on('value', function(snapshot) {
+            var notifVal = snapshot.val();
+            if(notifVal != null)
+            {
+                console.log(notifVal);
+            }
+        });
+    }
 };
 
 

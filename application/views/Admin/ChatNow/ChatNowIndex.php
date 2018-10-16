@@ -11,7 +11,8 @@
 </style>
 <script>
 $(document).ready(function(){
-   var userId = $("#userid").val();
-   fireObj.Online(userId);
+    var userId = $("#userid").val();
+    fireObj.Online(userId);
+    fireObj.ChatNotif(userId);
 });  
 </script>
