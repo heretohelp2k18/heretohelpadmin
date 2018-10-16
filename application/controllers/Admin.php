@@ -475,6 +475,15 @@ class Admin extends CI_Controller {
         $this->load->view('Admin/ChatNow/ChatNowIndex',$data);
         $this->load->view('Admin/AdminFooter');
     }
+    
+    public function AddChatroom()
+    {
+        $json_data = array();
+        $this->model->AddChatroom($_POST);
+        $json_data['success'] = TRUE;
+        echo json_encode($json_data);
+        exit;
+    }
 }
 
 ?>

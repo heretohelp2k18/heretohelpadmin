@@ -58,10 +58,64 @@ var fireObj = {
                 }
             });
         });
+    },
+    AcceptNotif : function(userId, chatroomId){
+        var chatRoom = fdb.ref('chatroom/');
+        var chatRoomRow = chatRoom.child(chatroomId);
+        chatRoomRow.on('value', function(snapshot) {
+            var chatRoomVal = snapshot.val();
+            if(fireObj.CurrentChatNotif != null)
+            {
+                if(chatRoomVal.expired)
+                {
+                    swal("Oops..", "Chat request expired.", "error");
+                }
+                else
+                {
+                    chatRoomRow.child("psychoid").set(userId);
+                    var dataObj = {
+                        psychoid : userId,
+                        userid : chatRoomVal.userid,
+                        chatroom : chatroomId
+                    };
+                    fireObj.InsertChatRoom(dataObj);
+                    fireObj.CurrentChatNotif = null;
+                    $(".chat-waiting").hide();
+                    $(".chat-input").removeClass("hidden");
+                }
+            }
+        });
+    },
+    InsertChatRoom : function(dataObj)
+    {
+        $.ajax({
+            url : '/admin/AddChatroom',
+            method : 'POST',
+            data : dataObj,
+            dataType : "json",
+            beforeSend : function(){
+                loading();
+            },
+            success: function(data) {
+                dismissLoading();
+                if(data.success)
+                {
+                }
+                else
+                {
+                    swal("Error", "Error connecting to server.", "error");
+                }
+            },
+            error : function()
+            {
+                dismissLoading();
+                swal("Error", "Error connecting to server.", "error");
+            }
+        });
     }
 };
 
-
+/*
 function writeUserData(userId, name, email) {
   fdb.ref('users/' + userId).set({
     username: name,
@@ -106,3 +160,4 @@ function addUser(username,email)
 }
 
 //addUser("Jethro with auto key","jethro@autokey.com");
+*/

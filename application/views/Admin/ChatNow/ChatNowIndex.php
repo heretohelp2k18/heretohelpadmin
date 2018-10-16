@@ -5,6 +5,20 @@
     <h1>Chat Now</h1>
     <br>
     <div class="col-xs-12 no-gutter">
+        <div class="col-xs-12 col-sm-4 col-md-3 chat-history-contaner">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 chat-box-container">
+            <div class="col-xs-12 chat-waiting">
+                <img src='/images/rolling.svg' class="chat-loading">
+                <h4 class="center-blocked text-center">We're finding you a member to talk to...</h4>
+            </div>
+            <div class="input-group chat-input hidden">
+                <input type="text" id="chatText" class="form-control" placeholder="Your chat here...">
+                <span class="input-group-addon">
+                    <i class="fa fa-send"></i>
+                </span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -97,7 +111,8 @@ $(document).ready(function(){
         var action = $(this).attr("data-value");
         if(action == 1)
         {
-            
+            var chatroom = $("#chatroom").val();
+            fireObj.AcceptNotif(userId,chatroom);
         }
         else if(action == 2)
         {

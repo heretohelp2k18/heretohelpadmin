@@ -446,5 +446,28 @@ Class AdminModel extends CI_Model {
             exit;
         }
     }
+    
+    public function AddChatroom($data)
+    {
+        try
+        {
+            extract($data);
+            $chatdate = date("Y-m-d H:i:s");
+            $sql = "INSERT INTO chatroom
+                    SET userid = ?,
+                    psychoid = ?,
+                    chatroom = ?,
+                    chatdate = ?
+                    ";
+            $stmt = $this->pdo->query($sql,array($userid, $psychoid, $chatroom, $chatdate));
+            $id = $this->pdo->insert_id();
+            return $id;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
 }
 ?>

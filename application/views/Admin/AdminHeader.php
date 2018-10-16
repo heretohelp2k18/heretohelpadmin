@@ -61,14 +61,11 @@
                     </li>';
                 }
                 
-                if($_SESSION['admin']['user_type'])
+                if($_SESSION['admin']['user_type'] == "Psychologist")
                 {
                     echo'
                     <li class="dropdown">
                       <a a href="/admin/preferences"><i class="fa fa-weixin" aria-hidden="true"></i>Chat Now</a>
-                    </li>
-                    <li class="dropdown">
-                      <a a href="/admin/preferences"><i class="fa fa-history" aria-hidden="true"></i>Chat History</a>
                     </li>
                     <li class="dropdown">
                       <a a href="/admin/preferences"><i class="fa fa-cogs" aria-hidden="true"></i>Account Settings</a>
