@@ -67,6 +67,7 @@
 // Render chat notif modal
 var renderChatNotif = function(chatNotif)
 {
+    fireObj.CurrentChatNotif = chatNotif;
     console.log(chatNotif);
     $("#chatroom").val(chatNotif.chatroom);
     $(".chatnotif_name").html(chatNotif.name);

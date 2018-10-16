@@ -25,6 +25,7 @@ var fireObj = {
         });
         con.onDisconnect().remove();
     },
+    CurrentChatNotif : null,
     ChatNotif : function(userId, renderChatNotifListener)
     {
         var chatNotif = fdb.ref('chatnotif/' + userId);
@@ -39,6 +40,24 @@ var fireObj = {
     DenyNotif : function(userId){
         var chatNotif = fdb.ref('chatnotif/' + userId);
         chatNotif.remove();
+        
+        var onlinePsych = fdb.ref('online/');
+        onlinePsych.child(userId).child("available").set(true);
+        onlinePsych.on('value', function(snapshot) {
+            var onlinePsychVal = snapshot.val();
+            $.each(onlinePsychVal, function(key, row){
+                if((row.available) && (key != userId))
+                {
+                    if(fireObj.CurrentChatNotif != null)
+                    {
+                        var passChatNotif = fdb.ref('chatnotif/' + key);
+                        passChatNotif.set(fireObj.CurrentChatNotif);
+                        fireObj.CurrentChatNotif = null;
+                        onlinePsych.child(key).child("available").set(false);
+                    }
+                }
+            });
+        });
     }
 };
 
