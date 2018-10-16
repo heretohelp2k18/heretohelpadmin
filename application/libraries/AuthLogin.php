@@ -67,8 +67,9 @@ class AuthLogin {
             $sql = "SELECT * FROM app_users 
                     WHERE username = ?
                     AND password = ?
-                    AND is_admin = 1
+                    AND ((position = 'Web Administrator') OR (position = 'Psychologist'))
                     AND enabled = 1";
+            //      AND is_admin = 1
             $stmt = $CI->pdo->query($sql,array($username,$password));
             return $stmt;
         } 

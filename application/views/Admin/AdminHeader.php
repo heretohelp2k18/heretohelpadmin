@@ -44,18 +44,39 @@
         </nav>
         <div class="left-nav col-xs-2 no-print">
             <ul class="nav modules">
-                <li class="dropdown">
-                  <a a href="/admin/dashboard"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a>
-                </li>
-                <li class="dropdown">
-                  <a a href="/admin/appUsers"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
-                </li>
-                <li class="dropdown">
-                  <a a href="/admin/chatbot"><i class="fa fa-wechat" aria-hidden="true"></i>Chat Bot</a>
-                </li>
-                <li class="dropdown">
-                  <a a href="/admin/preferences"><i class="fa fa-sliders" aria-hidden="true"></i>Preferences</a>
-                </li>
+                <?php
+                if($_SESSION['admin']['is_admin'] == 1)
+                {
+                    echo '<li class="dropdown">
+                      <a a href="/admin/dashboard"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a>
+                    </li>
+                    <li class="dropdown">
+                      <a a href="/admin/appUsers"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
+                    </li>
+                    <li class="dropdown">
+                      <a a href="/admin/chatbot"><i class="fa fa-wechat" aria-hidden="true"></i>Chat Bot</a>
+                    </li>
+                    <li class="dropdown">
+                      <a a href="/admin/preferences"><i class="fa fa-sliders" aria-hidden="true"></i>Preferences</a>
+                    </li>';
+                }
+                
+                if($_SESSION['admin']['user_type'])
+                {
+                    echo'
+                    <li class="dropdown">
+                      <a a href="/admin/preferences"><i class="fa fa-weixin" aria-hidden="true"></i>Chat Now</a>
+                    </li>
+                    <li class="dropdown">
+                      <a a href="/admin/preferences"><i class="fa fa-history" aria-hidden="true"></i>Chat History</a>
+                    </li>
+                    <li class="dropdown">
+                      <a a href="/admin/preferences"><i class="fa fa-cogs" aria-hidden="true"></i>Account Settings</a>
+                    </li>
+                    ';
+                }
+                
+                ?>
                 <li>
                     <a href="/admin/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                 </li>

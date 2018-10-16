@@ -49,6 +49,8 @@ class Admin extends CI_Controller {
             {
                 $_SESSION['admin']['login'] = TRUE;
                 $_SESSION['admin']['user_id'] = $user_data['id'];
+                $_SESSION['admin']['user_type'] = $user_data['position'];
+                $_SESSION['admin']['is_admin'] = $user_data['is_admin'];
                 $_SESSION['admin']['session_id'] = session_id();
                 $this->authlogin->SetSessionId($user_data['id'],session_id());
                 redirect("/admin");
