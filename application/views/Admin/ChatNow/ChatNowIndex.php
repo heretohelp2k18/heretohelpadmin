@@ -106,14 +106,14 @@
 <script>
 // My Info
 var MyInfo = JSON.parse('<?php echo $info; ?>');
-console.log("MyInfo:::");
-console.log(MyInfo);
+//console.log("MyInfo:::");
+//console.log(MyInfo);
     
 // Render chat notif modal
 var renderChatNotif = function(chatNotif)
 {
     fireObj.CurrentChatNotif = chatNotif;
-    console.log(chatNotif);
+//    console.log(chatNotif);
     $("#chatroom").val(chatNotif.chatroom);
     $(".chatnotif_name").html(chatNotif.name);
     if(chatNotif.gender == "Male")
@@ -144,8 +144,8 @@ function loadChatHistory(userId){
             success: function(data) {
                 if(data.success)
                 {
-                    console.log("data.chatroom_data:::");
-                    console.log(data.chatroom_data);
+//                    console.log("data.chatroom_data:::");
+//                    console.log(data.chatroom_data);
                     vueApp.populateHistoryItems(data.chatroom_data);
                 }
                 else
