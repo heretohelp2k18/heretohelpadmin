@@ -27,8 +27,11 @@
     </div>
     <div class="col-xs-12 col-sm-8 col-md-9 chat-box-container no-gutter">
         <div class="col-xs-12 chat-history-label">
-            <h4 class="chat-now-label">Chat Now</h4>
+            <h4 class="chat-now-label">Chat Now
+            <a style="float:right;" onclick="window.location.reload()">Leave Conversation</a>
         </div>
+            </h4>
+            
         <div id="chat-container" class="chat-container col-xs-12">
             <div v-for="(msg) in messages" class="col-xs-12 no-gutter">
                 <div v-if="msg.id != <?php echo $_SESSION['admin']['user_id']; ?>" class="pull-left">{{ msg.comment }}</div>
