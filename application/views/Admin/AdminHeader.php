@@ -48,16 +48,16 @@
                 if($_SESSION['admin']['is_admin'] == 1)
                 {
                     echo '<li class="dropdown">
-                      <a a href="/admin/dashboard"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a>
+                      <a href="/admin/dashboard"><i class="fa fa-home" aria-hidden="true"></i>Dashboard</a>
                     </li>
                     <li class="dropdown">
-                      <a a href="/admin/appUsers"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
+                      <a href="/admin/appUsers"><i class="fa fa-user" aria-hidden="true"></i>Users</a>
                     </li>
                     <li class="dropdown">
-                      <a a href="/admin/chatbot"><i class="fa fa-wechat" aria-hidden="true"></i>Chat Bot</a>
+                      <a href="/admin/chatbot"><i class="fa fa-wechat" aria-hidden="true"></i>Chat Bot</a>
                     </li>
                     <li class="dropdown">
-                      <a a href="/admin/preferences"><i class="fa fa-sliders" aria-hidden="true"></i>Preferences</a>
+                      <a href="/admin/preferences"><i class="fa fa-sliders" aria-hidden="true"></i>Preferences</a>
                     </li>';
                 }
                 
@@ -65,10 +65,10 @@
                 {
                     echo'
                     <li class="dropdown">
-                      <a a href="/admin/preferences"><i class="fa fa-weixin" aria-hidden="true"></i>Chat Now</a>
+                      <a href="/admin/chatNow"><i class="fa fa-weixin" aria-hidden="true"></i>Chat Now</a>
                     </li>
                     <li class="dropdown">
-                      <a a href="/admin/preferences"><i class="fa fa-cogs" aria-hidden="true"></i>Account Settings</a>
+                      <a href="/admin/account"><i class="fa fa-cogs" aria-hidden="true"></i>Account Settings</a>
                     </li>
                     ';
                 }

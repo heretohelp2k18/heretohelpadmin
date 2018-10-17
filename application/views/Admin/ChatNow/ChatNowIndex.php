@@ -29,7 +29,7 @@
         <div class="col-xs-12 chat-history-label">
             <h4 class="chat-now-label">Chat Now</h4>
         </div>
-        <div class="chat-container col-xs-12">
+        <div id="chat-container" class="chat-container col-xs-12">
             <div v-for="(msg) in messages" class="col-xs-12 no-gutter">
                 <div v-if="msg.id != <?php echo $_SESSION['admin']['user_id']; ?>" class="pull-left">{{ msg.comment }}</div>
                 <div v-else class="pull-right">{{ msg.comment }}</div>
@@ -168,7 +168,11 @@ var vueApp = new Vue({
                 var chatroom = fdb.ref('/chatroom');
                 var messages = chatroom.child(chatroomId).child("messages");
                 messages.on("value",function(snapshot){
-                   vueApp.messages = snapshot.val(); 
+                   vueApp.messages = snapshot.val();
+                   setTimeout(function(){
+                        var objDiv = document.getElementById("chat-container");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                    }, 500);
                 });
             },
             populateHistoryItems : function(historyItems){
