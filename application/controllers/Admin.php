@@ -495,7 +495,13 @@ class Admin extends CI_Controller {
     public function ChatNow()
     {
         $data = array();
-        $data['info'] = json_encode($this->model->GetAppUserById($_SESSION['admin']['user_id']));
+        $data['inforaw'] = $this->model->GetAppUserById($_SESSION['admin']['user_id']);
+        if(trim($data['inforaw']['autoresponse']) == "")
+        {
+            $data['inforaw']['autoresponse'] = DEFAULT_AUTO_RESPONSE;
+        }
+        
+        $data['info'] = json_encode($data['inforaw']);
         $this->load->view('Admin/AdminHeader');
         $this->load->view('Admin/ChatNow/ChatNowIndex',$data);
         $this->load->view('Admin/AdminFooter');
