@@ -79,6 +79,6 @@
                 </li>
             </ul>
         </div>
-        <div class="col-xs-10 print-body">
+        <div class="col-xs-10 print-body no-gutter">
             <div class="container">
                 <div class="main-container">

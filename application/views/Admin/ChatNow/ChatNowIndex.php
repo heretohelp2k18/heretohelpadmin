@@ -2,30 +2,48 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type = 'text/javascript' src = "<?php echo base_url();?>js/firebase-script.js"></script>
 <input type="hidden" id="userid" name="userid" value="<?php echo $_SESSION['admin']['user_id']; ?>">
-<div class="col-xs-12">
-    <h1>Chat Now</h1>
-    <br>
-    <div class="col-xs-12 no-gutter">
-        <div class="col-xs-12 col-sm-4 col-md-3 chat-history-contaner">
+
+<div id="vueapp" class="col-xs-12 no-gutter chat-now-parent">
+    <div class="col-xs-12 col-sm-4 col-md-3  no-gutter chat-history-container">
+        <div class="col-xs-12 chat-history-label">
+            <h4>Chat History</h4>
         </div>
-        <div class="col-xs-12 col-sm-8 col-md-9 chat-box-container">
-            <div id="vueapp" >
-                <div v-for="(msg) in messages" class="col-xs-12 no-gutter">
-                    <div v-if="msg.id != <?php echo $_SESSION['admin']['user_id']; ?>" class="pull-left">{{ msg.comment }}</div>
-                    <div v-else class="pull-right">{{ msg.comment }}</div>
-                </div>
-                
+        <div class="chat-history-list">
+            <div v-for="item in historyItem" class="col-xs-12 no-gutter history-item">
+                <a class="history-item-trigger col-xs-12 no-gutter" v-bind:data-chatroom="item.chatroom">
+                    <div v-if="item.gender == 'Male'" class="col-xs-4 col-md-3 chat-img-container">
+                        <img src="/images/boy.png" class="img-responsive chat-img">
+                    </div>
+                    <div v-else class="col-xs-4 col-md-3 chat-img-container">
+                        <img src="/images/girl.png" class="img-responsive chat-img">
+                    </div>
+                    <div class="col-xs-8 col-sm-9">
+                        <span class="ch-name">{{ item.chatmate }}</span>
+                        <span class="ch-date">{{ item.chatdate }}</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-xs-12 chat-waiting">
-                <img src='/images/rolling.svg' class="chat-loading">
-                <h4 class="center-blocked text-center">We're finding you a member to talk to...</h4>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 chat-box-container no-gutter">
+        <div class="col-xs-12 chat-history-label">
+            <h4 class="chat-now-label">Chat Now</h4>
+        </div>
+        <div class="chat-container col-xs-12">
+            <div v-for="(msg) in messages" class="col-xs-12 no-gutter">
+                <div v-if="msg.id != <?php echo $_SESSION['admin']['user_id']; ?>" class="pull-left">{{ msg.comment }}</div>
+                <div v-else class="pull-right">{{ msg.comment }}</div>
             </div>
-            <div class="input-group chat-input hidden">
-                <input type="text" id="chatText" class="form-control" placeholder="Your chat here...">
-                <span class="input-group-addon send-chat">
-                    <i class="fa fa-send"></i>
-                </span>
-            </div>
+        </div>
+        <div class="col-xs-12 chat-waiting">
+            <img src='/images/rolling.svg' class="chat-loading">
+            <h4 class="center-blocked text-center">We're finding you a member to talk to...</h4>
+        </div>
+        <div class="input-group chat-input hidden">
+            <input type="text" id="chatText" class="form-control" placeholder="Your chat here...">
+            <span class="input-group-addon send-chat">
+                <i class="fa fa-send"></i>
+            </span>
         </div>
     </div>
 </div>
@@ -108,11 +126,41 @@ var renderChatNotif = function(chatNotif)
     });
 };
 
+function loadChatHistory(userId){
+    $.ajax({
+            url : '/admin/GetChatroom',
+            method : 'POST',
+            data : {
+                userid : userId
+            },
+            dataType : "json",
+            beforeSend : function(){
+            },
+            success: function(data) {
+                if(data.success)
+                {
+                    console.log("data.chatroom_data:::");
+                    console.log(data.chatroom_data);
+                    vueApp.populateHistoryItems(data.chatroom_data);
+                }
+                else
+                {
+                    swal("Error", "Error connecting to server.", "error");
+                }
+            },
+            error : function()
+            {
+                swal("Error", "Error connecting to server.", "error");
+            }
+        });
+};
+
 // Vue js part
 var vueApp = new Vue({
         el: '#vueapp',
         data: {
-          messages : {}
+          messages : {},
+          historyItem : {}
         },
         methods : {
             populateMessages : function(chatroomId)
@@ -122,6 +170,9 @@ var vueApp = new Vue({
                 messages.on("value",function(snapshot){
                    vueApp.messages = snapshot.val(); 
                 });
+            },
+            populateHistoryItems : function(historyItems){
+                vueApp.historyItem = historyItems;
             }
         }
     });
@@ -129,9 +180,11 @@ var vueApp = new Vue({
 var populateMessages = function(chatroomId)
 {
     vueApp.populateMessages(chatroomId);
+    $(".chat-waiting").hide();
+    $(".chat-input").removeClass("hidden");
 };
 
-function sendChat()
+function sendChat(userId)
 {
     var chatText = $("#chatText").val();
     if(chatText.trim() == "")
@@ -166,13 +219,22 @@ $(document).ready(function(){
     });
     
     $(".send-chat").click(function(){
-        sendChat();
+        sendChat(userId);
     });
     
     $("#chatText").keyup(function(event){
         if (event.keyCode === 13) {
-            sendChat();
+            sendChat(userId);
         }
+    });
+    
+    // Load Chat History
+    loadChatHistory(userId);
+    
+    $(".chat-history-list").on("click", ".history-item-trigger", function(){
+        var chatroom = $(this).attr("data-chatroom");
+        populateMessages(chatroom);
+        fireObj.CurrentChatRoom = chatroom;
     });
 });
 </script>

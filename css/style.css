@@ -516,17 +516,16 @@ blockquote.no-margin-bottom
 
 .chat-box-container
 {
-    min-height: 70vh;
-    max-height: 70vh;
+    min-height: 85vh;
+    max-height: 85vh;
     border: 1px solid #ddd;
     border-left: none;
-    padding-top: 15px;
 }
 
-.chat-history-contaner
+.chat-history-container
 {
-    min-height: 70vh;
-    max-height: 70vh;
+    min-height: 85vh;
+    max-height: 85vh;
     border: 1px solid #ddd;
 }
 
@@ -575,4 +574,59 @@ blockquote.no-margin-bottom
 {
     color: #3498db;
     cursor: pointer;
+}
+
+.chat-now-parent
+{
+    margin-top: 20px;
+}
+
+.chat-history-label
+{
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-img-container
+{
+    padding: 5px;
+}
+
+.chat-img
+{
+    border-radius: 50%;
+    border: 1px solid #2980b9;
+    padding: 6px;
+}
+
+.history-item
+{
+    border-bottom: 1px solid #ddd;
+}
+
+.history-item-trigger:hover
+{
+    cursor: pointer;
+    background: #ddd;
+    transition: all 0.5s;
+}
+
+.history-item-trigger .ch-name
+{
+    color: initial;
+    padding-top: 10px;
+    font-weight: 600;
+    display: block;
+}
+
+.history-item-trigger .ch-date
+{
+    color: initial;
+    display: block;
+}
+
+.chat-container
+{
+    overflow-y: scroll;
+    height: 65vh;
+    margin-top: 20px;
 }

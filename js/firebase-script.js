@@ -86,8 +86,6 @@ var fireObj = {
                     fireObj.CurrentChatRoom = chatroomId;
                     populateMessagesListener(chatroomId);
                     fireObj.CurrentChatNotif = null;
-                    $(".chat-waiting").hide();
-                    $(".chat-input").removeClass("hidden");
                 }
             }
         });

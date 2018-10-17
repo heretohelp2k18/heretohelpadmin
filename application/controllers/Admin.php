@@ -484,6 +484,21 @@ class Admin extends CI_Controller {
         echo json_encode($json_data);
         exit;
     }
+    
+    public function GetChatroom()
+    {
+        $json_data = array();
+        $json_data['success'] = TRUE;
+        $json_data['chatroom_data'] = array();
+        $stmt = $this->model->GetChatrooms($_POST['userid']);
+        foreach($stmt->result() as $row)
+        {
+            $row->chatdate =  date("M d o", strtotime($row->chatdate)) . " " . date("h:i a", strtotime($row->chatdate));
+            array_push($json_data['chatroom_data'], $row);
+        }
+        echo json_encode($json_data);
+        exit;
+    }
 }
 
 ?>

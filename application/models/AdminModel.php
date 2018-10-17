@@ -469,5 +469,25 @@ Class AdminModel extends CI_Model {
             exit;
         }
     }
+    
+    public function GetChatrooms($userid)
+    {
+        try
+        {
+            $sql = "SELECT c.chatroom, c.chatdate, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
+                INNER JOIN app_users AS u
+                ON u.id = c.userid
+                WHERE psychoid = ?
+                ORDER BY c.id DESC";
+            
+            $stmt = $this->pdo->query($sql, array($userid));
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
 }
 ?>
