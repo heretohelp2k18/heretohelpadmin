@@ -45,18 +45,26 @@ var fireObj = {
         onlinePsych.child(userId).child("available").set(true);
         onlinePsych.on('value', function(snapshot) {
             var onlinePsychVal = snapshot.val();
-            $.each(onlinePsychVal, function(key, row){
-                if((row.available) && (key != userId))
-                {
-                    if(fireObj.CurrentChatNotif != null)
+            if(onlinePsychVal != null)
+            {
+                $.each(onlinePsychVal, function(key, row){
+                    if(row != null)
                     {
-                        var passChatNotif = fdb.ref('chatnotif/' + key);
-                        passChatNotif.set(fireObj.CurrentChatNotif);
-                        fireObj.CurrentChatNotif = null;
-                        onlinePsych.child(key).child("available").set(false);
+                        if((row.available) && (key != userId))
+                        {
+                            if(fireObj.CurrentChatNotif != null)
+                            {
+                                var passChatNotif = fdb.ref('chatnotif/' + key);
+                                passChatNotif.set(fireObj.CurrentChatNotif);
+                                fireObj.CurrentChatNotif = null;
+                                var onlinePsych = fdb.ref('online/');
+                                alert(key);
+                                onlinePsych.child(key).child("available").set(false);
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     },
     CurrentChatRoom : null,
