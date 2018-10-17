@@ -58,7 +58,6 @@ var fireObj = {
                                 passChatNotif.set(fireObj.CurrentChatNotif);
                                 fireObj.CurrentChatNotif = null;
                                 var onlinePsych = fdb.ref('online/');
-                                alert(key);
                                 onlinePsych.child(key).child("available").set(false);
                             }
                         }
@@ -84,7 +83,6 @@ var fireObj = {
                 }
                 else
                 {
-                    chatRoomRow.child("psychoid").set(userId);
                     var dataObj = {
                         psychoid : userId,
                         userid : chatRoomVal.userid,
@@ -94,6 +92,9 @@ var fireObj = {
                     fireObj.CurrentChatRoom = chatroomId;
                     populateMessagesListener(chatroomId);
                     fireObj.CurrentChatNotif = null;
+                    chatRoomRow.child("psychoid").set(userId);
+                    fireObj.InsertMessage(userId,MyInfo.autoresponse);
+                    loadChatHistory(userId);
                 }
             }
         });

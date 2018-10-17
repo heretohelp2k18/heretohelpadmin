@@ -104,6 +104,11 @@
     }
 </style>
 <script>
+// My Info
+var MyInfo = JSON.parse('<?php echo $info; ?>');
+console.log("MyInfo:::");
+console.log(MyInfo);
+    
 // Render chat notif modal
 var renderChatNotif = function(chatNotif)
 {

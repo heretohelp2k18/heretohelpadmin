@@ -56,6 +56,10 @@
               <label for="pwd">Confirm Password:</label>
               <input type="password" class="form-control input-sm" id="edit_confirmpassword" name="confirmpassword">
             </div>
+            <div class="form-group">
+              <label for="username">Auto Response:</label>
+              <textarea maxlength="225" class="form-control input-sm" id="edit_autoresponse" name="autoresponse" required></textarea>
+            </div>
             <div class="form-group form-group-lg" style="margin-bottom: 30px;">
                 <input type="submit" class="btn btn-submit">
             </div>

@@ -148,6 +148,16 @@ class Admin extends CI_Controller {
     {
         $json_data = array();
         $json_data['message'] = "User successfully updated!";
+        $is_account = FALSE;
+        if(isset($_POST['autoresponse']))
+        {
+            if(trim($_POST['autoresponse']) == "")
+            {
+                $_POST['autoresponse'] = DEFAULT_AUTO_RESPONSE;
+            }
+            $is_account = TRUE;
+        }
+        
         if((isset($_POST['action'])) && ($_POST['action'] == "account"))
         {
             $json_data['message'] = "Account successfully updated!";
@@ -156,7 +166,7 @@ class Admin extends CI_Controller {
                $_POST['is_admin'] = "on";
             }
         }
-        $json_data['success'] = $this->model->UpdateAppUser($_POST);;
+        $json_data['success'] = $this->model->UpdateAppUser($_POST, $is_account);
         echo json_encode($json_data);
         exit;
     }
@@ -173,6 +183,11 @@ class Admin extends CI_Controller {
     {
         $json_data = array();
         $json_data['info'] = $this->model->GetAppUserById($_POST['id']);
+        if(trim($json_data['info']['autoresponse']) == "")
+        {
+            $json_data['info']['autoresponse'] = DEFAULT_AUTO_RESPONSE;
+        }
+        
         $json_data['success'] = TRUE;
         echo json_encode($json_data);
         exit;
@@ -480,6 +495,7 @@ class Admin extends CI_Controller {
     public function ChatNow()
     {
         $data = array();
+        $data['info'] = json_encode($this->model->GetAppUserById($_SESSION['admin']['user_id']));
         $this->load->view('Admin/AdminHeader');
         $this->load->view('Admin/ChatNow/ChatNowIndex',$data);
         $this->load->view('Admin/AdminFooter');

@@ -186,6 +186,15 @@ var LoadAppUserEditMode = function(id)
                     {
                         $("#is-admin-update").prop("checked",false);
                     }
+                    
+                    if(data.info.autoresponse !== undefined)
+                    {
+                       if($("#edit_autoresponse").length > 0)
+                       {
+                           $("#edit_autoresponse").val(data.info.autoresponse);
+                       }
+                    }
+                    
                     $("#update-app-user-modal").modal();
                 }
                 else

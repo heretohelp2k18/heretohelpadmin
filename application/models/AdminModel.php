@@ -44,7 +44,7 @@ Class AdminModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,middlename,lastname,age,gender,position,email,username,is_admin,idimage FROM app_users WHERE id = ?";
+            $sql = "SELECT id,firstname,middlename,lastname,age,gender,position,email,username,is_admin,idimage,autoresponse FROM app_users WHERE id = ?";
             $stmt = $this->pdo->query($sql,array($id));
             $result = $stmt->result();
             return (array) $result[0];
@@ -111,7 +111,7 @@ Class AdminModel extends CI_Model {
         }
     }
     
-    public function UpdateAppUser($data) {
+    public function UpdateAppUser($data, $is_account) {
         try
         {
             extract($data);
@@ -124,40 +124,84 @@ Class AdminModel extends CI_Model {
                 $is_admin = 0;
             }
             
-            if(trim($password) == '')
+            if($is_account)
             {
-                $sql = "UPDATE app_users
-                        SET username = ?,
-                        lastname = ?,
-                        firstname = ?,
-                        middlename = ?,
-                        age = ?,
-                        gender = ?,
-                        email = ?,
-                        position = ?,
-                        is_admin = ?
-                        WHERE id = ?
-                        ";
-                $stmt = $this->pdo->query($sql,array($username,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$edit_id));
+                if(trim($password) == '')
+                {
+                    $sql = "UPDATE app_users
+                            SET username = ?,
+                            lastname = ?,
+                            firstname = ?,
+                            middlename = ?,
+                            age = ?,
+                            gender = ?,
+                            email = ?,
+                            position = ?,
+                            is_admin = ?,
+                            autoresponse = ?
+                            WHERE id = ?
+                            ";
+                    $stmt = $this->pdo->query($sql,array($username,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$autoresponse,$edit_id));
+                }
+                else 
+                {
+                    $password = sha1($password);
+                    $sql = "UPDATE app_users
+                            SET username = ?,
+                            password = ?,
+                            lastname = ?,
+                            firstname = ?,
+                            middlename = ?,
+                            age = ?,
+                            gender = ?,
+                            email = ?,
+                            position = ?,
+                            is_admin = ?,
+                            autoresponse = ?
+                            WHERE id = ?
+                            ";
+                    $stmt = $this->pdo->query($sql,array($username,$password,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$autoresponse,$edit_id));
+                }
             }
-            else 
+            else
             {
-                $password = sha1($password);
-                $sql = "UPDATE app_users
-                        SET username = ?,
-                        password = ?,
-                        lastname = ?,
-                        firstname = ?,
-                        middlename = ?,
-                        age = ?,
-                        gender = ?,
-                        email = ?,
-                        position = ?,
-                        is_admin = ?
-                        WHERE id = ?
-                        ";
-                $stmt = $this->pdo->query($sql,array($username,$password,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$edit_id));
+                if(trim($password) == '')
+                {
+                    $sql = "UPDATE app_users
+                            SET username = ?,
+                            lastname = ?,
+                            firstname = ?,
+                            middlename = ?,
+                            age = ?,
+                            gender = ?,
+                            email = ?,
+                            position = ?,
+                            is_admin = ?,
+                            WHERE id = ?
+                            ";
+                    $stmt = $this->pdo->query($sql,array($username,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$edit_id));
+                }
+                else 
+                {
+                    $password = sha1($password);
+                    $sql = "UPDATE app_users
+                            SET username = ?,
+                            password = ?,
+                            lastname = ?,
+                            firstname = ?,
+                            middlename = ?,
+                            age = ?,
+                            gender = ?,
+                            email = ?,
+                            position = ?,
+                            is_admin = ?
+                            WHERE id = ?
+                            ";
+                    $stmt = $this->pdo->query($sql,array($username,$password,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$edit_id));
+                }
             }
+            
+            
             return $stmt;
         } 
         catch (Exception $ex) 
