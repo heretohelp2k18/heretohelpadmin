@@ -489,5 +489,29 @@ Class AdminModel extends CI_Model {
             exit;
         }
     }
+    
+    public function CheckIfUserIsAdmin($userID)
+    {
+        try
+        {
+            $sql = "SELECT id FROM app_users 
+                    WHERE id = ?
+                    AND is_admin = 1";
+            $stmt = $this->pdo->query($sql, array($userID));
+            if(count($stmt->result()) > 0 )
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
 }
 ?>

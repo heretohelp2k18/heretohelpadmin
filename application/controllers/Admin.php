@@ -147,6 +147,15 @@ class Admin extends CI_Controller {
     public function UpdateAppUser()
     {
         $json_data = array();
+        $json_data['message'] = "User successfully updated!";
+        if((isset($_POST['action'])) && ($_POST['action'] == "account"))
+        {
+            $json_data['message'] = "Account successfully updated!";
+            if($_SESSION['admin']['is_admin'] == 1)
+            {
+               $_POST['is_admin'] = "on";
+            }
+        }
         $json_data['success'] = $this->model->UpdateAppUser($_POST);;
         echo json_encode($json_data);
         exit;
@@ -498,6 +507,14 @@ class Admin extends CI_Controller {
         }
         echo json_encode($json_data);
         exit;
+    }
+    
+    public function Account()
+    {
+        $data = array();
+        $this->load->view('Admin/AdminHeader');
+        $this->load->view('Admin/Account/AccountIndex',$data);
+        $this->load->view('Admin/AdminFooter');
     }
 }
 

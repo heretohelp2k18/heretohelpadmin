@@ -74,7 +74,7 @@ var UpdateUser = function(data)
                 $('#update_app_user_form')[0].reset();
                 $("#update-app-user-modal").modal('hide');
                 LoadAppUsers();
-                swal("Good job!", "User successfully updated!", "success");
+                swal("Good job!", data.message, "success");
             }
             else
             {
