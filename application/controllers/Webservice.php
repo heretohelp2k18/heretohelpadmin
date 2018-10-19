@@ -51,6 +51,7 @@ class Webservice extends CI_Controller {
                     $json_data['userage'] = $stmt[0]->age;
                     $json_data['usergender'] = $stmt[0]->gender;
                     $json_data['userautoresponse'] = $stmt[0]->autoresponse;
+                    $json_data['isguest'] = $stmt[0]->is_guest;
                     $json_data['token'] = $this->generateAppToken($stmt[0]->id);
                     $json_data['success'] = TRUE;
                 }
@@ -316,5 +317,13 @@ class Webservice extends CI_Controller {
 
         echo json_encode($json_data);
         exit;
+    }
+    
+    public function GuestLogin()
+    {
+        $data = $this->model->GuestLogin();
+        $_POST['username'] = $data[0];
+        $_POST['password'] = $data[1];
+        $this->Signin();
     }
 }

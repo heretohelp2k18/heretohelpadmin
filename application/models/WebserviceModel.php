@@ -25,7 +25,7 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,autoresponse,is_approved FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,autoresponse,is_approved,is_guest FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
             return $stmt->result();
         } 
@@ -300,6 +300,33 @@ Class WebserviceModel extends CI_Model {
             
             $stmt = $this->pdo->query($sql, array($userid));
             return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
+    public function GuestLogin()
+    {
+        try
+        {
+            $curtime = time();
+            $username = "guest_" . $curtime;
+            $password = sha1($curtime);
+            
+            $sql = "INSERT INTO app_users
+                    SET username = ?,
+                    password = ?,
+                    position = 'User',
+                    enabled = 1,
+                    is_guest = 1
+                    ";
+            $stmt = $this->pdo->query($sql,array($username,$password));
+
+            $id = $this->pdo->insert_id();
+            return array( $username, $curtime);
         } 
         catch (Exception $ex) 
         {
