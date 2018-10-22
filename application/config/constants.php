@@ -88,3 +88,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 // CUSTOM CONSTANTS
 defined('TINYMCE_API_KEY')      OR define('TINYMCE_API_KEY', "dpmajz70uer6p18wt3otijr60b2jsartuszdj9k2bowwm5zc"); // TinyMCE Api key
 defined('DEFAULT_AUTO_RESPONSE') OR define('DEFAULT_AUTO_RESPONSE', "Hi, what can I help you with today?");
+defined('DEFAULT_MESSAGE_TO_GUEST') OR define('DEFAULT_MESSAGE_TO_GUEST', "Hi, as guest you will be able to use the app for 3 hours. To keep on chatting with our psychologists, please click the sign up button.");

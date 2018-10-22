@@ -18,9 +18,8 @@ class Webservice extends CI_Controller {
         echo "Entering Here To Help Web Service...";
     }
 
-    public function Signin()
+    public function Signin($json_data = array())
     {
-        $json_data = array();
         if(isset($_POST['username']) && isset($_POST['password']))
         {
             $username = $_POST['username'];
@@ -324,6 +323,8 @@ class Webservice extends CI_Controller {
         $data = $this->model->GuestLogin();
         $_POST['username'] = $data[0];
         $_POST['password'] = $data[1];
-        $this->Signin();
+        $json_data = array();
+        $json_data['message_to_guest'] = DEFAULT_MESSAGE_TO_GUEST;
+        $this->Signin($json_data);
     }
 }
