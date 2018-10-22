@@ -318,12 +318,14 @@ Class WebserviceModel extends CI_Model {
             
             $sql = "INSERT INTO app_users
                     SET username = ?,
+                    firstname = ?,
                     password = ?,
+                    gender = 'Male',
                     position = 'User',
                     enabled = 1,
                     is_guest = 1
                     ";
-            $stmt = $this->pdo->query($sql,array($username,$password));
+            $stmt = $this->pdo->query($sql,array($username, $username, $password));
 
             $id = $this->pdo->insert_id();
             return array( $username, $curtime);
