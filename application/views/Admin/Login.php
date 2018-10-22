@@ -24,6 +24,9 @@
                     <h3>Login</h3>
                 </div>
             </div>
+            <div class="col-xs-12 text-center">
+                <img src="/images/logo.png" class="img-responsive">
+            </div>
             <form action="/admin/login" method="post" class="col-xs-12 login-inner">
                 <div class="form-group">
                     <label for="username">Username:</label>

@@ -353,9 +353,8 @@ input:checked + .slider:before {
 
 .login-holder img
 {
-    width: 50px;
-    margin: 10px;
-    float: left;
+    width: 150px;
+    margin: 20px auto;
 }
 
 .login-title
