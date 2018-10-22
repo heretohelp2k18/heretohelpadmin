@@ -1,1 +1,1 @@
-ALTER TABLE `app_users` CHANGE `is_citizen` `is_guest` TINYINT(1) NOT NULL DEFAULT '0';
+ALTER TABLE `app_users` ADD `is_guest` TINYINT(1) NOT NULL AFTER `enabled`;
