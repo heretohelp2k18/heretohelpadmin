@@ -146,11 +146,11 @@ else if(IS_TEST)
 else
 {
     $db['pdo'] = array(
-        'dsn'   => 'mysql:host=localhost;dbname=heretohelp',
+        'dsn'   => 'mysql:host=localhost;dbname=u290241648_db',
         //'hostname' => 'localhost',
-        'username' => '',
-        'password' => '',
-        'database' => '',
+        'username' => 'u290241648_user',
+        'password' => '09079072250',
+        'database' => 'u290241648_db',
         'dbdriver' => 'pdo',
         'dbprefix' => '',
         'pconnect' => FALSE,
