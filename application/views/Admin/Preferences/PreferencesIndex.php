@@ -24,7 +24,7 @@ tinymce.init({
                 <?php echo $list ?>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-9 mob-no-gutter">
             <form id="savePref">
                 <input type="hidden" id="prefid" value="<?php echo $prefid ?>">
                 <div class="input-group">

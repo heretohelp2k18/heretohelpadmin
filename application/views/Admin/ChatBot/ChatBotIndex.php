@@ -19,13 +19,13 @@
                 <?php echo $list ?>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-9 mob-no-gutter">
             <form id="saveSequence">
                 <div class="input-group">
                     <span class="input-group-addon lbl">Title</span>
                     <input type="hidden" id="sequenceid" name="sequenceid" value="<?php echo $botId; ?>">
                     <input type="hidden" id="botTag" name="botTag" value="<?php echo $botTag; ?>">
-                    <span class="form-control"><?php echo $title ?></span>
+                    <span class="form-control height-auto"><?php echo $title ?></span>
                     <span class="input-group-addon delete">
                         <i class="fa fa-trash"></i>
                     </span>

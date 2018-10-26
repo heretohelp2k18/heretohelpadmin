@@ -51,4 +51,9 @@
     .modal-dialog {
         width: 95%;
     }
+    
+    .mob-no-gutter
+    {
+        padding: 0;
+    }
 }

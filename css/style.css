@@ -639,3 +639,8 @@ blockquote.no-margin-bottom
 {
     padding-right: 10px;
 }
+
+.height-auto
+{
+    height: auto;
+}
