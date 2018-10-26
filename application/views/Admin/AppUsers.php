@@ -1,6 +1,6 @@
 <div class="col-xs-12">
     <h1>Users</h1>
-    <div class="col-xs-12 no-gutter users">
+    <div class="col-xs-12 no-gutter users table-responsive">
         <table class="table table-striped table-hover">
         <thead>
           <tr>

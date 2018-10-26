@@ -177,7 +177,7 @@ Class AdminModel extends CI_Model {
                             gender = ?,
                             email = ?,
                             position = ?,
-                            is_admin = ?,
+                            is_admin = ?
                             WHERE id = ?
                             ";
                     $stmt = $this->pdo->query($sql,array($username,$lastname,$firstname,$middlename,$age,$gender,$email,$position,$is_admin,$edit_id));
