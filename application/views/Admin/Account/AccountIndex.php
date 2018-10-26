@@ -1,7 +1,7 @@
 <input type="hidden" id="userid" name="userid" value="<?php echo $_SESSION['admin']['user_id']; ?>">
 <div class="col-xs-12">
     <div class="col-xs-12 col-md-6 no-gutter">
-        <form id="update_app_user_form" class="col-xs-12">
+        <form id="update_app_user_form" class="col-xs-12 mob-no-gutter">
             <input type="hidden" id="edit_id" name="edit_id">
             <input type="hidden" id="action" name="action" value="account">
             <div class="form-group">
