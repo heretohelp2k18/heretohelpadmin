@@ -12,13 +12,13 @@
         <div class="chat-history-list">
             <div v-for="item in historyItem" class="col-xs-12 no-gutter history-item">
                 <a class="history-item-trigger col-xs-12 no-gutter" v-bind:data-chatroom="item.chatroom">
-                    <div v-if="item.gender == 'Male'" class="col-xs-4 col-sm-3 chat-img-container">
+                    <div v-if="item.gender == 'Male'" class="col-xs-3 col-sm-3 chat-img-container">
                         <img src="/images/boy.png" class="img-responsive chat-img">
                     </div>
-                    <div v-else class="col-xs-4 col-sm-3 chat-img-container">
+                    <div v-else class="col-xs-3 col-sm-3 chat-img-container">
                         <img src="/images/girl.png" class="img-responsive chat-img">
                     </div>
-                    <div class="col-xs-8 col-sm-9">
+                    <div class="col-xs-9 col-sm-9">
                         <span class="ch-name">{{ item.chatmate }}</span>
                         <span class="ch-date">{{ item.chatdate }}</span>
                     </div>
