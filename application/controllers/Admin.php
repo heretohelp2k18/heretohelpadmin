@@ -65,7 +65,7 @@ class Admin extends CI_Controller {
         else
         {
             $data = array();
-            $data['show_message'] = 'false';
+            $data['showMessage'] = 'false';
             $data['message'] = ''; 
             if(isset($_SESSION['login_message']))
             {
