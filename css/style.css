@@ -629,3 +629,13 @@ blockquote.no-margin-bottom
     height: 65vh;
     margin-top: 20px;
 }
+
+.navbar-toggle .icon-bar
+{
+    background: #fff;
+}
+
+.navbar-collapse li>a>i
+{
+    padding-right: 10px;
+}

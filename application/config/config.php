@@ -5,7 +5,7 @@ if(isset($_SERVER['SERVER_NAME']))
 {
     // For URL access
     $domain = explode(".", $_SERVER['SERVER_NAME']);
-    if(in_array('dev', $domain))
+    if((in_array('dev', $domain)) || in_array('192', $domain))
     {
         define('IS_DEV', TRUE);
         define('IS_TEST', FALSE);
@@ -64,7 +64,7 @@ else if(IS_TEST)
 }
 else
 {
-    $config['base_url'] = 'http://heretohelp.000webhostapp.com/';
+    $config['base_url'] = 'http://heretohelponline.xyz/';
 }
 
 /*

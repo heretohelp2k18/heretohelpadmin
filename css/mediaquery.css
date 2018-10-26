@@ -1,0 +1,39 @@
+@media only screen and (min-width: 768px) {
+    .navbar .navbar-collapse
+    {
+        display: none !important;
+    }
+}
+
+/*For Tablet*/
+@media only screen and (max-width: 768px) {
+    
+}
+
+/*For Mobile*/
+@media only screen and (max-width: 736px) {
+    .login-holder {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        border: none;
+    }
+    
+    .navbar-brand
+    {
+        margin-left: 5px !important;
+    }
+    
+    .left-nav
+    {
+        display: none;
+    }
+    
+    .main-container>div
+    {
+        padding: 0;
+    }
+}

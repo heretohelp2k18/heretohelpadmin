@@ -1,7 +1,6 @@
 <div class="col-xs-12">
     <h1>Dashboard</h1>
-    <br>
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-md-6 col-lg-4 dashboard-item">
         <a href="/admin/appUsers/?qtype=User">
             <div class="col-xs-12 col-sm-4 dash-item dash-item-1" style="background:#cd1a57;">
                 <i class="fa fa-user"></i>
@@ -12,7 +11,7 @@
             </div>
         </a>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-md-6 col-lg-4 dashboard-item">
         <a href="/admin/appUsers/?qtype=Psychologist">
             <div class="col-xs-12 col-sm-4 dash-item dash-item-1" style="background:#00a5ba;">
                 <i class="fa fa-vcard"></i>
@@ -23,8 +22,7 @@
             </div>
         </a>
     </div>
-
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-md-6 col-lg-4 dashboard-item">
         <a href="/admin/appUsers/?qtype=Pending">
             <div class="col-xs-12 col-sm-4 dash-item dash-item-1" style="background:#d35400;">
                 <i class="fa fa-server"></i>
@@ -70,6 +68,11 @@
 .dash-item span.count
 {
     font-size: 40px;
+}
+
+.dashboard-item
+{
+    margin-top: 20px;
 }
 
 </style>

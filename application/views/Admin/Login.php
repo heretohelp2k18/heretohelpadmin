@@ -3,10 +3,12 @@
 
     <head> 
         <meta charset = "utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Here To Help</title> 
         <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/bootstrap.min.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/style.css">
+        <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/mediaquery.css">
         <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/sweetalert.css">
         <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/loader.css">
         <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed" rel="stylesheet">
