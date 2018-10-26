@@ -5,9 +5,20 @@
     }
 }
 
+/*For Tablet Landscape*/
+@media only screen and (max-width: 1024px) {
+    .main-container>div
+    {
+        padding-left: 30px;
+    }
+}
+
 /*For Tablet*/
 @media only screen and (max-width: 768px) {
-    
+    .main-container>div
+    {
+        padding-left: 15px;
+    }
 }
 
 /*For Mobile*/
@@ -35,5 +46,9 @@
     .main-container>div
     {
         padding: 0;
+    }
+    
+    .modal-dialog {
+        width: 95%;
     }
 }
