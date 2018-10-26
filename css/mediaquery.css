@@ -56,4 +56,34 @@
     {
         padding: 0;
     }
+    
+    .chat-history-container
+    {
+        position: absolute;
+        left: -150%;
+        top: 45px;
+        background: #fff;
+        z-index: 999;
+    }
+    
+    .chat-history-container.mob-show
+    {
+        left: 0;
+    }
+    
+    .chat-box-container {
+        border-left: 1px solid #ddd;
+    }
+    
+    #chatnotif_image {
+        width: 40vw;
+    }
+    
+    span.chatnotif_name {
+        font-size: 20px;
+    }
+    
+    .chatnotif-action-holder {
+        margin-bottom: 10px !important;
+    }
 }

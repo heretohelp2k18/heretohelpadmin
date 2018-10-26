@@ -4,6 +4,7 @@
 <input type="hidden" id="userid" name="userid" value="<?php echo $_SESSION['admin']['user_id']; ?>">
 
 <div id="vueapp" class="col-xs-12 no-gutter chat-now-parent">
+    <div class="col-xs-12 visible-xs no-gutter"><button type="button" class="btn btn-info show-history">Show Chat History >></button></div>
     <div class="col-xs-12 col-sm-4 col-md-3  no-gutter chat-history-container">
         <div class="col-xs-12 chat-history-label">
             <h4>Chat History</h4>
@@ -11,10 +12,10 @@
         <div class="chat-history-list">
             <div v-for="item in historyItem" class="col-xs-12 no-gutter history-item">
                 <a class="history-item-trigger col-xs-12 no-gutter" v-bind:data-chatroom="item.chatroom">
-                    <div v-if="item.gender == 'Male'" class="col-xs-4 col-md-3 chat-img-container">
+                    <div v-if="item.gender == 'Male'" class="col-xs-4 col-sm-3 chat-img-container">
                         <img src="/images/boy.png" class="img-responsive chat-img">
                     </div>
-                    <div v-else class="col-xs-4 col-md-3 chat-img-container">
+                    <div v-else class="col-xs-4 col-sm-3 chat-img-container">
                         <img src="/images/girl.png" class="img-responsive chat-img">
                     </div>
                     <div class="col-xs-8 col-sm-9">
@@ -104,6 +105,11 @@
     .chatnotif-action-holder
     {
         margin-bottom: 20px;
+    }
+    
+    .show-history
+    {
+        margin-bottom: 10px;
     }
 </style>
 <script>
@@ -244,9 +250,25 @@ $(document).ready(function(){
     loadChatHistory(userId);
     
     $(".chat-history-list").on("click", ".history-item-trigger", function(){
+        $(".chat-history-container").removeClass("mob-show");
+        $(".show-history").html("Show Chat History >>");
         var chatroom = $(this).attr("data-chatroom");
         populateMessages(chatroom);
         fireObj.CurrentChatRoom = chatroom;
+    });
+    
+    $(".show-history").click(function(){
+        var visib = $(".chat-history-container").hasClass("mob-show");
+        if(visib)
+        {
+            $(".chat-history-container").removeClass("mob-show");
+            $(".show-history").html("Show Chat History >>");
+        }
+        else
+        {
+            $(".chat-history-container").addClass("mob-show");
+            $(".show-history").html("<< Hide Chat History");
+        }
     });
 });
 </script>
