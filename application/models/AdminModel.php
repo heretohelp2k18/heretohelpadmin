@@ -28,6 +28,7 @@ Class AdminModel extends CI_Model {
             
             $sql = "SELECT * FROM app_users 
                     WHERE enabled = 1
+                    AND is_guest = 0
                     $addtional_query
                     ORDER BY lastname,firstname,username";
             $stmt = $this->pdo->query($sql);
