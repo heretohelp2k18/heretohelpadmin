@@ -445,6 +445,7 @@ Class AdminModel extends CI_Model {
         {
             $sql = "SELECT count(*) as count FROM app_users 
                     WHERE enabled = 1
+                    AND is_guest = 0
                     AND position = 'User'";
             $stmt = $this->pdo->query($sql);
             return $stmt;
