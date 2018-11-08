@@ -51,6 +51,7 @@ class Webservice extends CI_Controller {
                     $json_data['usergender'] = $stmt[0]->gender;
                     $json_data['userautoresponse'] = $stmt[0]->autoresponse;
                     $json_data['isguest'] = $stmt[0]->is_guest;
+                    $json_data['userskipchatbot'] = $stmt[0]->skipchatbot;
                     $json_data['token'] = $this->generateAppToken($stmt[0]->id);
                     $json_data['success'] = TRUE;
                 }
@@ -326,5 +327,23 @@ class Webservice extends CI_Controller {
         $json_data = array();
         $json_data['message_to_guest'] = DEFAULT_MESSAGE_TO_GUEST;
         $this->Signin($json_data);
+    }
+    
+    public function SetSkipChatBot()
+    {
+        $json_data = array();
+        extract($_POST);
+        $stmt = $this->model->AuthenticateUserToken($username,$token);
+        if(count($stmt) > 0)
+        {
+            $this->model->SetSkipChatBot($userid);
+            $json_data['success'] = TRUE;
+        }
+        else
+        {
+            $json_data['success'] = FALSE;
+        }
+        echo json_encode($json_data);
+        exit;
     }
 }

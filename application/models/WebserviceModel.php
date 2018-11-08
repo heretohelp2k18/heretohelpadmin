@@ -25,7 +25,7 @@ Class WebserviceModel extends CI_Model {
     {
         try
         {
-            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,autoresponse,is_approved,is_guest FROM app_users where username = ? and password = ?";
+            $sql = "SELECT id,firstname,middlename,lastname,age,username,email,position,gender,autoresponse,is_approved,is_guest,skipchatbot FROM app_users where username = ? and password = ?";
             $stmt = $this->pdo->query($sql,array($username,$password));
             return $stmt->result();
         } 
@@ -336,6 +336,25 @@ Class WebserviceModel extends CI_Model {
             exit;
         }
     }
+    
+    public function SetSkipChatBot($userid)
+    {
+        try
+        {
+            $sql = "UPDATE app_users
+                    SET skipchatbot = 1
+                    WHERE id = ?
+                    ";
+            $stmt = $this->pdo->query($sql,array($userid));
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
 }
 
 ?> 
