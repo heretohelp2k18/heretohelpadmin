@@ -112,6 +112,25 @@ Class AdminModel extends CI_Model {
         }
     }
     
+    public function MultipleDeleteAppUser($ids)
+    {
+        try
+        {
+            $sql = "UPDATE app_users
+                    SET enabled = 0
+                    WHERE id IN (".implode(',',$ids).")
+                    ";
+            $stmt = $this->pdo->query($sql);
+
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
+    
     public function UpdateAppUser($data, $is_account) {
         try
         {

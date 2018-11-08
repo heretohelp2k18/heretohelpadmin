@@ -138,7 +138,7 @@ var DeleteAppUser = function(id)
                 if(data.success)
                 {
                     LoadAppUsers();
-                    swal("Deleted!", "User has been deleted.", "success");
+                    swal("Deleted!", data.message, "success");
                 }
                 else
                 {

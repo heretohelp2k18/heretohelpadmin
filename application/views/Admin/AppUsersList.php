@@ -1,6 +1,16 @@
 <?php
 echo "
-<tr>
+<tr>";
+    if($is_superadmin == 0)
+    {
+        echo "<td><input type='checkbox' value='$id' name='chkmuldel' class='chkmuldel'></td>";
+    }
+    else
+    {
+        echo "<td>&nbsp;</td>";
+    }
+    
+echo "
     <td>$lastname</td>
     <td>$firstname</td>
     <td>$username</td>

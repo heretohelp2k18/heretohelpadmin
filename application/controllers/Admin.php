@@ -174,7 +174,16 @@ class Admin extends CI_Controller {
     public function DeleteAppUser()
     {
         $json_data = array();
-        $json_data['success'] = $this->model->DeleteAppUser($_POST['id']);
+        if(is_array($_POST['id']))
+        {
+            $json_data["message"] = "Users has been deleted.";
+            $json_data['success'] = $this->model->MultipleDeleteAppUser($_POST['id']);
+        }
+        else
+        {
+            $json_data["message"] = "User has been deleted.";
+            $json_data['success'] = $this->model->DeleteAppUser($_POST['id']);
+        }
         echo json_encode($json_data);
         exit;
     }

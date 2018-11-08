@@ -1,15 +1,19 @@
 <div class="col-xs-12">
-    <h1>Users</h1>
+    <h1 class="pull-left">Users</h1>
+    <div class="pull-right" style="margin-top: 25px;">
+        <button type="button" id="muldelbtn" class="btn btn-danger">Delete Selected</button>
+    </div>
     <div class="col-xs-12 no-gutter users table-responsive">
         <table class="table table-striped table-hover">
         <thead>
-          <tr>
-            <th>Lastname</th>
-            <th>Firstname</th>
-            <th>Username</th>
-            <th>User Type</th>
-            <th>Actions</th>
-          </tr>
+            <tr>
+                <th><input type="checkbox" id="muldel"> All</th>
+                <th>Lastname</th>
+                <th>Firstname</th>
+                <th>Username</th>
+                <th>User Type</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody id="appUsersBody">
           <?php echo $list; ?>
@@ -343,6 +347,46 @@
                     
             });
         });
+        
+        $("#muldel").change(function(){
+            if($(this).is(":checked"))
+            {
+                $(".chkmuldel").prop("checked", true);
+            }
+            else
+            {
+                $(".chkmuldel").prop("checked", false);
+            }
+        });
+        
+        $("#muldelbtn").click(function(){
+            var selected = [];
+            $('.chkmuldel:checked').each(function() {
+                selected.push($(this).val());
+            });
+            console.log(selected);
+            if(selected.length == 0)
+            {
+                swal("Oops..", "No selected user.","error");
+            }
+            else
+            {
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover these records!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                  },
+                  function(){
+                        DeleteAppUser(selected);
+                  });
+            }
+        });
+        
     });
 
 </script>
