@@ -436,11 +436,31 @@ class Admin extends CI_Controller {
     public function updatePreference()
     {
         $json_data = array();
-        $json_data['success'] = $this->model->UpdatePreference($_POST);
-        if($json_data['success'])
+        if(trim($_POST['tag']) != "")
         {
-            $json_data['message'] = "Preference successfully updated";
+            if($this->isTagAvailable($_POST['tag'],$_POST['id']))
+            {
+                $json_data['success'] = $this->model->UpdatePreference($_POST);
+                if($json_data['success'])
+                {
+                    $json_data['message'] = "Preference successfully updated";
+                }
+            }
+            else
+            {
+                $json_data['success'] = FALSE;
+                $json_data['message'] = "Tag already exists";
+            }
         }
+        else
+        {
+            $json_data['success'] = $this->model->UpdatePreference($_POST);
+            if($json_data['success'])
+            {
+                $json_data['message'] = "Preference successfully updated";
+            }
+        }
+        
         echo json_encode($json_data);
         exit;
     }
@@ -546,6 +566,19 @@ class Admin extends CI_Controller {
         $this->load->view('Admin/AdminHeader');
         $this->load->view('Admin/Account/AccountIndex',$data);
         $this->load->view('Admin/AdminFooter');
+    }
+    
+    public function isTagAvailable($tag,$id)
+    {
+        $is_exist = $this->model->CheckIfTagExist($tag,$id);
+        if(!empty($is_exist->result()))
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
 }
 
