@@ -5,7 +5,7 @@
             <?php echo $answers; ?>
         </select>
     </span>
-    <input type="text" class="form-control answer-flow" name="sequence" placeholder="value>action" value="<?php echo $value.">".$action; ?>">
+    <input type="text" class="form-control answer-flow" name="sequence" placeholder="action" value="<?php echo $action; ?>">
     <span class="input-group-btn">
         <button type="button" class="btn btn-danger del-option"><i class="fa fa-times"></i></button>
     </span>

@@ -47,7 +47,7 @@
                                 <?php echo $answers; ?>
                             </select>
                         </span>
-                        <input type="text" class="form-control answer-flow" name="sequence" placeholder="value>action" value="">
+                        <input type="text" class="form-control answer-flow" name="sequence" placeholder="action" value="">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-danger del-option"><i class="fa fa-times"></i></button>
                         </span>
@@ -66,6 +66,9 @@
     </div>
 </div>
 <script>
+var json_answers = JSON.parse('<?php echo $json_answers?>');
+//console.log("json_answers::");
+//console.log(json_answers);
 
 $("#newsequence").submit(function(){
     $.ajax({
@@ -113,10 +116,10 @@ $("#saveSequence").submit(function(){
     var ctr = 1;
     $(".option-list .option-item").each(function(){
         var tag = answer[ctr];
-        var flow = $(this).children(".answer-flow").val();
-        var answerFlow = flow.split(">");
-        var actionValue = answerFlow[0];
-        var action = answerFlow[1];
+        var action = $(this).children(".answer-flow").val();
+//        var answerFlow = flow.split(">");
+        var actionValue = json_answers[tag];
+//        var action = answerFlow[1];
         
         if((actionValue != null) && (action != null))
         {

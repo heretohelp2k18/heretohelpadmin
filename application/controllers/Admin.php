@@ -302,6 +302,7 @@ class Admin extends CI_Controller {
         }
         
         $data['answers'] = $this->BuildAnswers();
+        $data['json_answers'] = $this->BuildJSONAnswers();
         
         $data['sequenceList'] = '';
         if($data['sequence'] != "")
@@ -336,6 +337,17 @@ class Admin extends CI_Controller {
             $answers .= $this->load->view('Admin/ChatBot/SelectAnswer',$row,TRUE);
         }
         return $answers;
+    }
+    
+    public function BuildJSONAnswers()
+    {
+        $json_answers = array();
+        $stmt = $this->model->GetAnswers();
+        foreach ($stmt->result() as $row)
+        {
+            $json_answers[$row->tag] = $row->value;
+        }
+        return json_encode($json_answers);
     }
     
     public function addChatBotSequence()
