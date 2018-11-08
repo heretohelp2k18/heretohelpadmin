@@ -1,0 +1,1 @@
+ALTER TABLE `app_users` ADD `is_superadmin` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_admin`, ADD `skipchatbot` TINYINT(1) NOT NULL DEFAULT '0' AFTER `is_superadmin`;
