@@ -2,7 +2,6 @@
 <script>
 tinymce.init({
    selector: "textarea",
-   plugins: "a11ychecker, advcode, linkchecker, media mediaembed, powerpaste, tinymcespellchecker",
    toolbar: "a11ycheck, code, tinycomments"
 });
 </script>
@@ -38,6 +37,11 @@ tinymce.init({
                 <div class="input-group">
                     <span class="input-group-addon lbl">TAG</span>
                     <input id="tag" type="text" class="form-control" name="tag" placeholder="..." value="<?php echo $tag ?>">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon lbl">Value</span>
+                    <input id="value" type="number" class="form-control" name="value" placeholder="Optional value" value="<?php echo $value ?>">
                 </div>
                 <br>
                 <textarea id="content" style="height:35vh;"><?php echo $content ?></textarea>
@@ -92,7 +96,8 @@ $("#savePref").submit(function(){
             id : $("#prefid").val(),
             title : $("#preftitle").val(),
             tag : $("#tag").val(),
-            content : tinyMCE.get('content').getContent()
+            content : tinyMCE.get('content').getContent(),
+            value : $("#value").val()
         },
         dataType : "json",
         beforeSend : function(){

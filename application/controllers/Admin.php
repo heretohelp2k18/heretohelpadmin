@@ -389,6 +389,7 @@ class Admin extends CI_Controller {
         $data['title'] = "";
         $data['tag'] = "";
         $data['content'] = ""; 
+        $data['value'] = ""; 
         $data['list'] = '';
         $stmt = $this->model->GetPreferences();
         foreach($stmt->result() as $row)
@@ -404,6 +405,7 @@ class Admin extends CI_Controller {
                 $data['title'] = $row->title;
                 $data['tag'] = $row->tag;
                 $data['content'] = $row->content;
+                $data['value'] = $row->value; 
                 $row->active = "active"; 
             }
             else

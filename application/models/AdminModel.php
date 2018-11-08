@@ -311,10 +311,11 @@ Class AdminModel extends CI_Model {
             $sql = "UPDATE preferences
                     SET title = ?,
                     tag = ?,
-                    content = ?
+                    content = ?,
+                    value = ?
                     WHERE id = ?
                     ";
-            $stmt = $this->pdo->query($sql,array($title,$tag,$content,$id));
+            $stmt = $this->pdo->query($sql,array($title,$tag,$content,$value,$id));
             
             return $stmt;
         } 
