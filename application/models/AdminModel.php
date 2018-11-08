@@ -578,5 +578,22 @@ Class AdminModel extends CI_Model {
             exit;
         }
     }
+    
+    public function CheckIfTagExist($tag,$id)
+    {
+        try
+        {
+            $sql = "SELECT id from preferences 
+                    where id != ?
+                    AND tag = ?";
+            $stmt = $this->pdo->query($sql,array($id, $tag));
+            return $stmt;
+        } 
+        catch (Exception $ex) 
+        {
+            echo $ex;
+            exit;
+        }
+    }
 }
 ?>

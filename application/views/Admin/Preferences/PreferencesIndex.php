@@ -112,7 +112,7 @@ $("#savePref").submit(function(){
             }
             else
             {
-                swal("Error", "Error connecting to server.", "error");
+                swal("Oops..", data.message, "error");
             }
         },
         error : function()
