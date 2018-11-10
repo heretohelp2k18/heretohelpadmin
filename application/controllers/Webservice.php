@@ -285,7 +285,9 @@ class Webservice extends CI_Controller {
         $json_data = array();
         $json_data['errorcode'] = "";
         $json_data['message'] = "";
-        $json_data['chatroom_data'] = array();
+        $json_data['chatroom_data_raw'] = array();
+        $json_data['chatroom_data_distinct'] = array();
+        $json_data['chatroom_data_distinct_for_client'] = array();
         if(isset($_POST['username']) && isset($_POST['token']))
         {
             $username = $_POST['username'];
@@ -299,7 +301,26 @@ class Webservice extends CI_Controller {
                 foreach($stmt->result() as $row)
                 {
                     $row->chatdate =  date("M d o", strtotime($row->chatdate)) . " " . date("h:i a", strtotime($row->chatdate));
-                    array_push($json_data['chatroom_data'], $row);
+                    array_push($json_data['chatroom_data_raw'], $row);
+                    if($_POST['usertype'] == "User")
+                    {
+                        if(!isset($json_data['chatroom_data_distinct'][$row->psychoid]))
+                        {
+                            $json_data['chatroom_data_distinct'][$row->psychoid] = $row;
+                        }
+                    }
+                    else if($_POST['usertype'] == "Psychologist")
+                    {
+                        if(!isset($json_data['chatroom_data_distinct'][$row->userid]))
+                        {
+                            $json_data['chatroom_data_distinct'][$row->userid] = $row;
+                        }
+                    }
+                }
+                
+                foreach ($json_data['chatroom_data_distinct'] as $distinct_row)
+                {
+                    array_push($json_data['chatroom_data_distinct_for_client'], $distinct_row);
                 }
             }
             else

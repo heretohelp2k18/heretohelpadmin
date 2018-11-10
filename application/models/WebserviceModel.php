@@ -283,7 +283,7 @@ Class WebserviceModel extends CI_Model {
         {
             if($usertype == "User")
             {
-                $sql = "SELECT c.chatroom, c.chatdate, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
+                $sql = "SELECT c.chatroom, c.chatdate, c.psychoid, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
                     INNER JOIN app_users AS u
                     ON u.id = c.psychoid
                     WHERE userid = ?
@@ -291,7 +291,7 @@ Class WebserviceModel extends CI_Model {
             }
             else if($usertype == "Psychologist")
             {
-                $sql = "SELECT c.chatroom, c.chatdate, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
+                $sql = "SELECT c.chatroom, c.chatdate, c.userid, CONCAT(u.firstname, ' ', u.lastname) AS chatmate, u.gender FROM chatroom AS c
                     INNER JOIN app_users AS u
                     ON u.id = c.userid
                     WHERE psychoid = ?
