@@ -274,7 +274,7 @@ $(document).ready(function(){
     });
     
     $(".start-new-convo").click(function(){
-        if(!historyMode)
+        if((!historyMode) && (fireObj.CurrentChatRoom !== null))
         {
             var UserFullName = MyInfo.firstname + " " + MyInfo.lastname;
             fireObj.InsertMessage(userId, "<i>-- " + UserFullName + " left this conversation... --</i>");
