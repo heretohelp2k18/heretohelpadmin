@@ -77,9 +77,16 @@ var fireObj = {
             var chatRoomVal = snapshot.val();
             if(fireObj.CurrentChatNotif != null)
             {
-                if(chatRoomVal.expired)
+                if((chatRoomVal.psychoid != userId) && (chatRoomVal.psychoid != 0))
                 {
-                    swal("Oops..", "Chat request expired.", "error");
+                    swal({
+                        title: "Oops..",
+                        text: "This request has been taken by other psychologist.",
+                        type: "error"
+                      },
+                      function(){
+                        window.location.reload();
+                      });
                 }
                 else
                 {
