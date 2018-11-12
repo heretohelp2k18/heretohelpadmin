@@ -29,7 +29,7 @@
     <div class="col-xs-12 col-sm-8 col-md-9 chat-box-container no-gutter">
         <div class="col-xs-12 chat-history-label">
             <h4 class="chat-now-label">Chat Now
-            <a style="float:right;cursor: pointer;" onclick="window.location.reload()">Start New Conversation</a>
+                <a href="#!" style="float:right;cursor: pointer;" class="start-new-convo">Start New Conversation</a>
         </div>
             </h4>
             
@@ -115,6 +115,7 @@
 <script>
 // My Info
 var MyInfo = JSON.parse('<?php echo $info; ?>');
+var historyMode = false;
 //console.log("MyInfo:::");
 //console.log(MyInfo);
     
@@ -250,6 +251,7 @@ $(document).ready(function(){
     loadChatHistory(userId);
     
     $(".chat-history-list").on("click", ".history-item-trigger", function(){
+        historyMode = true;
         $(".chat-history-container").removeClass("mob-show");
         $(".show-history").html("Show Chat History >>");
         var chatroom = $(this).attr("data-chatroom");
@@ -269,6 +271,15 @@ $(document).ready(function(){
             $(".chat-history-container").addClass("mob-show");
             $(".show-history").html("<< Hide Chat History");
         }
+    });
+    
+    $(".start-new-convo").click(function(){
+        if(!historyMode)
+        {
+            var UserFullName = MyInfo.firstname + " " + MyInfo.lastname;
+            fireObj.InsertMessage(userId, "<i>-- " + UserFullName + " left this conversation... --</i>");
+        }
+        window.location.reload();
     });
 });
 </script>
